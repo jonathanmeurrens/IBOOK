@@ -7,7 +7,7 @@ import flash.display.StageScaleMode;
 
 import starling.core.Starling;
 
-[SWF(frameRate=60,width=1280,height=1024,backgroundColor=0x000000)]
+[SWF(frameRate=60,width=1280,height=800,backgroundColor=0x000000)]
 public class Main extends MovieClip {
 
     private var _starling:Starling;
