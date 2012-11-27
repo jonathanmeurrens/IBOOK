@@ -35,7 +35,7 @@ public class Page extends Sprite
         private var _pageVO:PageVO;
         private var _background:Picture;
         private var _bodyTXT:TextField;
-        private var _bodyBackground:Shape;
+        private var _bodyBackgroundImage:Image;
 
         public function Page(pageVO:PageVO)
         {
@@ -60,19 +60,19 @@ public class Page extends Sprite
             _bodyTXT.vAlign=VAlign.BOTTOM;
             addChild(_bodyTXT);
 
-            _bodyBackground = new Shape();
-            _bodyBackground.graphics.beginFill(0xFFFFFF);
-            _bodyBackground.graphics.drawRect(0,0,_bodyTXT.width+_bodyTXT.x+20,stage.stageHeight);
-            _bodyBackground.graphics.endFill();
-            _bodyBackground.filters = [ new DropShadowFilter(4, 45, 0x000000, 0.3, 17, 17, 2, 3) ];
+            var bodyBackground = new Shape();
+            bodyBackground.graphics.beginFill(0xFFFFFF);
+            bodyBackground.graphics.drawRect(0,0,_bodyTXT.width+_bodyTXT.x+20,stage.stageHeight);
+            bodyBackground.graphics.endFill();
+            bodyBackground.filters = [ new DropShadowFilter(4, 45, 0x000000, 0.3, 17, 17, 2, 3) ];
 
-            var bmpData:BitmapData = new BitmapData(_bodyBackground.width+20, _bodyBackground.height, true, 0x0);
-            bmpData.draw(_bodyBackground);
+            var bmpData:BitmapData = new BitmapData(bodyBackground.width+20, bodyBackground.height, true, 0x0);
+            bmpData.draw(bodyBackground);
             var texture:Texture = Texture.fromBitmapData(bmpData);
-            var image:Image = new Image(texture);
-            addChild(image);
+            _bodyBackgroundImage = new Image(texture);
+            addChild(_bodyBackgroundImage);
 
-            setChildIndex(image,getChildIndex(_background)+1);
+            setChildIndex(_bodyBackgroundImage,getChildIndex(_background)+1);
         }
     private function tweenBackground():void
     {
@@ -100,8 +100,8 @@ public class Page extends Sprite
         var textTween:Tween = new Tween(_bodyTXT, 2, Transitions.EASE_IN);
         textTween.animate("x", -_bodyBackground.width);
         Starling.juggler.add(textTween);
-        var bodyTween:Tween = new Tween(_bodyBackground, 2, Transitions.EASE_IN);
-        bodyTween.animate("x", -_bodyBackground.width);
+        var bodyTween:Tween = new Tween(_bodyBackgroundImage, 2, Transitions.EASE_IN);
+        bodyTween.animate("x", -_bodyBackgroundImage.width);
         Starling.juggler.add(bodyTween);
     }
     }
