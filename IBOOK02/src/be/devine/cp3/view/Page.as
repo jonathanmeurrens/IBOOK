@@ -41,7 +41,7 @@ public class Page extends Sprite
         {
             trace('[PAGE] construct');
             _pageVO = pageVO;
-
+            //
             addEventListener(Event.ADDED_TO_STAGE, init);
         }
 
@@ -98,7 +98,7 @@ public class Page extends Sprite
     {
         trace('[PAGE] TweeningOut');
         var textTween:Tween = new Tween(_bodyTXT, 2, Transitions.EASE_IN);
-        textTween.animate("x", -_bodyTXT.width);
+        textTween.animate("x", -_bodyBackground.width);
         Starling.juggler.add(textTween);
         var bodyTween:Tween = new Tween(_bodyBackground, 2, Transitions.EASE_IN);
         bodyTween.animate("x", -_bodyBackground.width);
