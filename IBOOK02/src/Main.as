@@ -1,6 +1,4 @@
 package {
-
-
 import be.devine.cp3.Application;
 
 import flash.display.MovieClip;
@@ -21,7 +19,7 @@ public class Main extends MovieClip {
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
         //starling instellen
-        _starling = new Starling(Application,stage);
+        _starling = new Starling(Application, stage);
         _starling.start();
     }
 }
