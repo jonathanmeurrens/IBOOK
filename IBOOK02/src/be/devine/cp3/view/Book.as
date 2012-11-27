@@ -39,11 +39,11 @@ public class Book extends Sprite
                 break;
             }
             //Page uittweenen (hoort in een aparte function)
-            /*page.tweenOut();
+            page.tweenOut();
             var tween:Tween = new Tween(page, 2, Transitions.EASE_IN);
             tween.animate("x",-1400);
             tween.delay = 1;
-            Starling.juggler.add(tween);*/
+            Starling.juggler.add(tween);
         }
     }
 }
