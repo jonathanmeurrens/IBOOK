@@ -4,6 +4,8 @@ import be.devine.cp3.Application;
 import flash.display.MovieClip;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
+import flash.events.Event;
+import flash.geom.Rectangle;
 
 import starling.core.Starling;
 
@@ -21,6 +23,15 @@ public class Main extends MovieClip {
         //starling instellen
         _starling = new Starling(Application, stage);
         _starling.start();
+
+        //resize handler
+        stage.addEventListener(Event.RESIZE, resizeHandler);
+    }
+
+    private function resizeHandler(event:Event):void {
+        if(_starling != null) {
+            //page number moet aan de rechterkant van het scherm blijven.
+        }
     }
 }
 }
