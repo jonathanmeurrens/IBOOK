@@ -1,0 +1,28 @@
+<book theme="blue">
+    <title>My iBook</title>
+    <summary>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur auctor turpis, quis congue magna aliquet ac. Donec arcu turpis, vehicula ac varius eu, pharetra a libero. Proin blandit rutrum dolor nec feugiat. Quisque eget condimentum erat. Nulla facilisi. Aliquam tincidunt elit quis ante facilisis ac cursus tortor fermentum.</summary>
+    <pages>
+        <page background="assets/images/01.jpg">
+            <title>A First Title</title>
+            <body>Donec eget nunc sit amet dolor fringilla tincidunt. In tristique, risus id bibendum tristique, neque velit laoreet nulla, id molestie eros justo sed metus. Curabitur cursus lacus et nulla congue sed placerat quam suscipit. Ut lacus urna, laoreet vitae aliquam et, molestie at nibh. Morbi sit amet varius erat. Sed aliquet consequat auctor. Morbi sollicitudin lectus risus, non dapibus eros. Nam venenatis, erat consectetur suscipit laoreet, dolor purus pretium eros, ac accumsan odio lacus non magna. Pellentesque ultricies bibendum dolor, in feugiat sem imperdiet vel. Vivamus urna nisi, venenatis ac suscipit id, ullamcorper bibendum neque. Aliquam erat volutpat. Morbi sed bibendum nisi. Integer rutrum dignissim egestas.</body>
+            <link>2</link>
+        </page>
+        <page background="01.jpg">
+            <title>A Second Page</title>
+            <body>I like being the second page!</body>
+            <gallery>
+                <image url="image1.jpg" caption="my cool image"></image>
+                <image url="image2.jpg" caption="my cool image2"></image>
+            </gallery>
+            <link>3</link>
+        </page>
+        <page background="01.jpg">
+            <title>What about me?</title>
+            <body>I'm some cool content</body>
+            <link></link>
+            <gallery>
+                <image url="image3.jpg" caption="my cool image"></image>
+            </gallery>
+        </page>
+    </pages>
+</book>
