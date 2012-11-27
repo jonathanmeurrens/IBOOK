@@ -20,6 +20,8 @@ public class AppModel extends EventDispatcher{
 
     private var _currentPageIndex:uint;
     private var _currentPage:PageVO;
+    private var _appWidth:uint;
+    private var _appHeigth:uint;
 
     //######
     //Events
