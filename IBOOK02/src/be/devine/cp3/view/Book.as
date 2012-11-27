@@ -12,6 +12,11 @@ import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
 
+import starling.animation.Transitions;
+
+import starling.animation.Tween;
+import starling.core.Starling;
+
 import starling.display.Sprite;
 
 public class Book extends Sprite
@@ -33,7 +38,12 @@ public class Book extends Sprite
                 addChild(page);
                 break;
             }
-
+            //Page uittweenen (hoort in een aparte function)
+            /*page.tweenOut();
+            var tween:Tween = new Tween(page, 2, Transitions.EASE_IN);
+            tween.animate("x",-1400);
+            tween.delay = 1;
+            Starling.juggler.add(tween);*/
         }
     }
 }
