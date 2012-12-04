@@ -27,7 +27,7 @@ public class CurrentPageButton extends Button{
 
         // button background
         var background:Shape  = new Shape();
-        background.graphics.beginFill(AppModel.getInstance().bookVO.themeColor);
+        background.graphics.beginFill(0xffffff);
         background.graphics.drawRect(0,0,40,30);
         background.graphics.endFill();
 
