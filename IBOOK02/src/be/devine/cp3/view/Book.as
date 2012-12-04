@@ -29,6 +29,8 @@ public class Book extends Sprite
             _appModel = AppModel.getInstance();
             _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
             _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, pageChangedHandler);
+
+
         }
 
         private function bookChangedHandler(e:Event):void

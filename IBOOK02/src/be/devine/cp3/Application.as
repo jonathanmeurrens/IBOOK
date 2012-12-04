@@ -11,8 +11,12 @@ import be.devine.cp3.util.BookXMLParser;
 import be.devine.cp3.view.Book;
 import be.devine.cp3.view.Timeline;
 
+import flash.ui.Keyboard;
+
 
 import starling.display.Sprite;
+import starling.events.Event;
+import starling.events.KeyboardEvent;
 
 public class Application extends Sprite
 {
@@ -29,8 +33,8 @@ public class Application extends Sprite
         var book:Book = new Book();
         addChild(book);
 
-        var timeline:Timeline = new Timeline();
-        addChild(timeline);
+        /*var timeline:Timeline = new Timeline();
+        addChild(timeline);*/
     }
 }
 }

@@ -24,10 +24,10 @@ public class Title extends MyTextField
         _appModel = AppModel.getInstance();
         _titleVO = titleVO;
 
-        super(550,2,_titleVO.title.toUpperCase(),"Didot",30,_appModel.bookVO.fontColor);
+        super(1,1,_titleVO.title.toUpperCase(),"Didot",30,_appModel.bookVO.fontColor);
 
-        _background = new Quad(width+10,height,_appModel.bookVO.themeColor);
-        _background.x -= 15;
+        _background = new Quad(width+20,height,_appModel.bookVO.themeColor);
+        _background.x -= 10;
         addChild(_background);
         setChildIndex(_background,0);
 
