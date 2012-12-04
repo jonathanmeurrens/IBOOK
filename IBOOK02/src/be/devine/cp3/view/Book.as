@@ -22,27 +22,37 @@ import starling.display.Sprite;
 public class Book extends Sprite
     {
         private var _appModel:AppModel;
+        private var _pages:Vector.<Page>;
 
         public function Book()
         {
             _appModel = AppModel.getInstance();
-            _appModel.addEventListener(AppModel.BOOK_CHANGED, pagesBookChangedHandler);
+            _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
+            _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, pageChangedHandler);
         }
 
-        private function pagesBookChangedHandler(e:Event):void
+        private function bookChangedHandler(e:Event):void
         {
+            _pages = new Vector.<Page>();
+            var xPos:uint = 0;
             for each(var pageVO:PageVO in _appModel.bookVO.pages)
             {
-                //trace(pageVO.title);
                 var page:Page = new Page(pageVO);
                 addChild(page);
-                break;
+                page.x = xPos;
+                xPos+=stage.stageWidth;
+                _pages.push(page);
             }
-            //Page uittweenen (hoort in een aparte function)
-            page.tweenOut();
-            var tween:Tween = new Tween(page, 2, Transitions.EASE_IN);
-            tween.animate("x",-1400);
-            tween.delay = 1;
+        }
+
+        private function pageChangedHandler(e:Event):void
+        {
+            if(_appModel.currentPageIndex>0)
+                Page(_pages[_appModel.currentPageIndex-1]).transitionOut();
+            Page(_pages[_appModel.currentPageIndex]).transitionIn();
+
+            var tween:Tween = new Tween(this, 2, Transitions.EASE_IN_OUT);
+            tween.animate("x",-(_appModel.currentPageIndex)*stage.stageWidth);
             Starling.juggler.add(tween);
         }
     }

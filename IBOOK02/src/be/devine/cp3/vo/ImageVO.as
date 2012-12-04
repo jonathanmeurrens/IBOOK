@@ -7,7 +7,7 @@
  */
 package be.devine.cp3.vo
 {
-public class ImageVO
+public class ImageVO extends ComponentVO
 {
     public var url:String;
     public var caption:String;

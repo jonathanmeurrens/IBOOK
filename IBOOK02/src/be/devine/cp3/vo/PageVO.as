@@ -9,15 +9,43 @@ package be.devine.cp3.vo
 {
 public class PageVO
 {
-    public var title:String;
-    public var body:String;
-    public var background_image:String;
-    public var gallery:Vector.<ImageVO>=new Vector.<ImageVO>();
-    public var link:uint;
+    public var _components:Vector.<ComponentVO> = new Vector.<ComponentVO>();
 
-    public function PageVO()
-    {
+    /*private var _titleVO:ComponentVO;
+    private var _bodyVO:ComponentVO;
+    private var _galleryVO:GalleryVO;
+    private var _linkVO:LinkVO;*/
 
+    /*public function get galleryVO():GalleryVO {
+        return _gallery;
     }
+
+    public function set galleryVO(value:GalleryVO):void {
+        _gallery = value;
+    }
+
+    public function get linkVO():LinkVO {
+        return _link;
+    }
+
+    public function set link(value:uint):void {
+        _link = value;
+    }
+
+    public function get titleVO():TitleVO {
+        return _titleVO;
+    }
+
+    public function set titleVO(value:TitleVO):void {
+        _titleVO = value;
+    }
+
+    public function get bodyVO():BodyVO {
+        return _bodyVO;
+    }
+
+    public function set bodyVO(value:BodyVO):void {
+        _bodyVO = value;
+    }*/
 }
 }

@@ -7,74 +7,51 @@
  */
 package be.devine.cp3.view
 {
-import be.devine.cp3.view.components.Picture;
+
+import be.devine.cp3.factory.view.ComponentViewFactory;
+import be.devine.cp3.util.AlignUtil;
+import be.devine.cp3.view.components.buttons.NextPageBtn;
+import be.devine.cp3.view.components.text.Body;
+import be.devine.cp3.view.components.text.Title;
+import be.devine.cp3.view.gallery.Gallery;
+import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
-
-import flash.display.BitmapData;
-
-import flash.display.Shape;
-import flash.filters.DropShadowFilter;
 
 import starling.animation.Transitions;
 
 import starling.animation.Tween;
 import starling.core.Starling;
-import starling.display.Image;
-
-import starling.display.Quad;
+import starling.display.DisplayObject;
 
 import starling.display.Sprite;
 import starling.events.Event;
-import starling.text.TextField;
-import starling.textures.Texture;
-import starling.utils.HAlign;
-import starling.utils.VAlign;
 
 public class Page extends Sprite
     {
         private var _pageVO:PageVO;
-        private var _background:Picture;
-        private var _bodyTXT:TextField;
-        private var _bodyBackgroundImage:Image;
+        private var _foregroundContainer:Sprite;
 
         public function Page(pageVO:PageVO)
         {
-            trace('[PAGE] construct');
             _pageVO = pageVO;
+            _foregroundContainer = new Sprite();
 
-            addEventListener(Event.ADDED_TO_STAGE, init);
+            for each(var componentVO:ComponentVO in _pageVO._components)
+            {
+                var component:DisplayObject = ComponentViewFactory.createFromVO(componentVO);
+                if(component is Gallery)
+                    addChild(component);
+                else
+                    _foregroundContainer.addChild(component);
+                addChild(_foregroundContainer);
+            }
         }
 
-        private function init(e:Event):void
-        {
-            removeEventListener(Event.ADDED_TO_STAGE, init);
+    /*
+     TWEENING
+     */
 
-            _background = new Picture(_pageVO.background_image);
-            addChild(_background);
-            tweenBackground();
-
-            _bodyTXT = new TextField(450,stage.stageHeight-20,_pageVO.body,"Arial",14);
-            trace(stage.stageHeight);
-            _bodyTXT.x = 20;
-            _bodyTXT.hAlign=HAlign.LEFT;
-            _bodyTXT.vAlign=VAlign.BOTTOM;
-            addChild(_bodyTXT);
-
-            var bodyBackground = new Shape();
-            bodyBackground.graphics.beginFill(0xFFFFFF);
-            bodyBackground.graphics.drawRect(0,0,_bodyTXT.width+_bodyTXT.x+20,stage.stageHeight);
-            bodyBackground.graphics.endFill();
-            bodyBackground.filters = [ new DropShadowFilter(4, 45, 0x000000, 0.3, 17, 17, 2, 3) ];
-
-            var bmpData:BitmapData = new BitmapData(bodyBackground.width+20, bodyBackground.height, true, 0x0);
-            bmpData.draw(bodyBackground);
-            var texture:Texture = Texture.fromBitmapData(bmpData);
-            _bodyBackgroundImage = new Image(texture);
-            addChild(_bodyBackgroundImage);
-
-            setChildIndex(_bodyBackgroundImage,getChildIndex(_background)+1);
-        }
-    private function tweenBackground():void
+    /*private function tweenBackground():void
     {
         if(_background.x == 0)
         {
@@ -92,17 +69,35 @@ public class Page extends Sprite
             t.onComplete = tweenBackground;
             Starling.juggler.add(t);
         }
+    }*/
+
+    public function transitionIn():void
+    {
+        _foregroundContainer.x+=200;
+        var tween:Tween = new Tween(_foregroundContainer, 2, Transitions.EASE_IN_OUT);
+        tween.animate("x",_foregroundContainer.x-200);
+        Starling.juggler.add(tween);
+    }
+
+    public function transitionOut():void
+    {
+        var tween:Tween = new Tween(_foregroundContainer, 1.5, Transitions.EASE_IN_OUT);
+        tween.animate("x",_foregroundContainer.x-200);
+        tween.onComplete = function():void{
+            _foregroundContainer.x+=200;
+        }
+        Starling.juggler.add(tween);
     }
 
     public function tweenOut():void
     {
-        trace('[PAGE] TweeningOut');
+        /*trace('[PAGE] TweeningOut');
         var textTween:Tween = new Tween(_bodyTXT, 2, Transitions.EASE_IN);
         textTween.animate("x", -_bodyTXT.width);
         Starling.juggler.add(textTween);
         var bodyTween:Tween = new Tween(_bodyBackgroundImage, 2, Transitions.EASE_IN);
         bodyTween.animate("x", -_bodyBackgroundImage.width);
-        Starling.juggler.add(bodyTween);
+        Starling.juggler.add(bodyTween);*/
     }
     }
 }

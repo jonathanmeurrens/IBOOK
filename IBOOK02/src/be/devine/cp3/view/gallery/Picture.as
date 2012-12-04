@@ -5,9 +5,9 @@
  * Time: 14:37
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components {
-import be.devine.cp3.util.queue.ImageTask;
-import be.devine.cp3.util.queue.QueueLoader;
+package be.devine.cp3.view.gallery {
+import be.devine.cp3.util.queue.Queue;
+import be.devine.cp3.util.queue.tasks.LoaderTask;
 
 import flash.display.Bitmap;
 import flash.events.Event;
@@ -19,13 +19,13 @@ import starling.textures.Texture;
 
 public class Picture extends Sprite
 {
-    private var _loadingQueue:QueueLoader;
-    private var _imageTask:ImageTask;
+    private var _loadingQueue:Queue;
+    private var _imageTask:LoaderTask;
 
     public function Picture(url:String)
     {
-        _loadingQueue = new QueueLoader();
-        _imageTask = new ImageTask(url);
+        _loadingQueue = new Queue();
+        _imageTask = new LoaderTask(url);
         _loadingQueue.add(_imageTask);
         _imageTask.addEventListener(Event.COMPLETE,onComplete);
         _loadingQueue.start();

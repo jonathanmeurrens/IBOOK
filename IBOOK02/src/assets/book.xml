@@ -1,28 +1,45 @@
-<book theme="blue">
+<book themeColor="31f1dd" fontColor="222222">
     <title>My iBook</title>
     <summary>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur auctor turpis, quis congue magna aliquet ac. Donec arcu turpis, vehicula ac varius eu, pharetra a libero. Proin blandit rutrum dolor nec feugiat. Quisque eget condimentum erat. Nulla facilisi. Aliquam tincidunt elit quis ante facilisis ac cursus tortor fermentum.</summary>
     <pages>
-        <page background="assets/images/01.jpg">
-            <title>A First Title</title>
-            <body>Donec eget nunc sit amet dolor fringilla tincidunt. In tristique, risus id bibendum tristique, neque velit laoreet nulla, id molestie eros justo sed metus. Curabitur cursus lacus et nulla congue sed placerat quam suscipit. Ut lacus urna, laoreet vitae aliquam et, molestie at nibh. Morbi sit amet varius erat. Sed aliquet consequat auctor. Morbi sollicitudin lectus risus, non dapibus eros. Nam venenatis, erat consectetur suscipit laoreet, dolor purus pretium eros, ac accumsan odio lacus non magna. Pellentesque ultricies bibendum dolor, in feugiat sem imperdiet vel. Vivamus urna nisi, venenatis ac suscipit id, ullamcorper bibendum neque. Aliquam erat volutpat. Morbi sed bibendum nisi. Integer rutrum dignissim egestas.</body>
+        <page >
+            <title vAlign="top" hAlign="left">A fruit seller</title>
+            <body vAlign="bottom" hAlign="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum cursus lorem et dictum. Proin sit amet metus et risus pharetra tincidunt. Nulla porta commodo dignissim. Sed gravida nunc a eros eleifend non accumsan urna volutpat. Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum cursus lorem et dictum. Proin sit amet metus et risus pharetra tincidunt. Nulla porta commodo dignissim. Sed gravida nunc a eros eleifend non accumsan urna volutpat. Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.</body>
             <link>2</link>
-        </page>
-        <page background="01.jpg">
-            <title>A Second Page</title>
-            <body>I like being the second page!</body>
             <gallery>
-                <image url="image1.jpg" caption="my cool image"></image>
-                <image url="image2.jpg" caption="my cool image2"></image>
+                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
+                <image url="assets/images/02.jpg" caption="Asians!"></image>
             </gallery>
+        </page>
+        <page>
+
+            <title vAlign="center" hAlign="center">A Second Page</title>
+
+            <link>3</link>
+            <gallery>
+                <image url="assets/images/02.jpg" caption="Asians!"></image>
+                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
+            </gallery>
+        </page>
+        <page>
+            <gallery>
+                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
+                <image url="assets/images/02.jpg" caption="Asians!"></image>
+            </gallery>
+            <title>Third Page</title>
+            <body>I like being the second page!</body>
+
             <link>3</link>
         </page>
-        <page background="01.jpg">
-            <title>What about me?</title>
+        <page>
+            <gallery>
+                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
+                <image url="assets/images/02.jpg" caption="Asians!"></image>
+            </gallery>
+            <title>What about me? I'm the fourth page</title>
             <body>I'm some cool content</body>
             <link></link>
-            <gallery>
-                <image url="image3.jpg" caption="my cool image"></image>
-            </gallery>
+
         </page>
     </pages>
 </book>

@@ -1,15 +1,15 @@
 package be.devine.cp3.util
 {
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.util.queue.QueueLoader;
-import be.devine.cp3.util.queue.XMLTask;
+import be.devine.cp3.util.queue.Queue;
+import be.devine.cp3.util.queue.tasks.URLLoaderTask;
 
 import flash.events.Event;
 
 public class XMLParser
 {
     protected var _appModel:AppModel;
-    private var _queueLoader:QueueLoader;
+    private var _queueLoader:Queue;
 
     public function XMLParser()
     {
@@ -18,8 +18,8 @@ public class XMLParser
 
     public function parse(url:String):void
     {
-        _queueLoader = new QueueLoader();
-        var xmlTask:XMLTask = new XMLTask(url);
+        _queueLoader = new Queue();
+        var xmlTask:URLLoaderTask = new URLLoaderTask(url);
         xmlTask.addEventListener(Event.COMPLETE, xmlLoadingDoneHandler);
         _queueLoader.add(xmlTask);
         _queueLoader.start();
@@ -28,7 +28,7 @@ public class XMLParser
     private function xmlLoadingDoneHandler(e:Event):void
     {
         trace("[XMLParser] parsing");
-        parseXML(XMLTask(e.target).xml);
+        parseXML(XML(URLLoaderTask(e.target).data));
     }
 
     protected function parseXML(xml:XML):void
