@@ -90,7 +90,7 @@ public class AppModel extends EventDispatcher{
     }
 
     public function set bookVO(value:BookVO):void {
-        if (_bookVO = value)
+        if (_bookVO != value)
         {
             _bookVO = value;
             dispatchEvent(new Event(BOOK_CHANGED));

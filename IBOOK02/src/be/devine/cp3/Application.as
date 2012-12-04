@@ -9,8 +9,8 @@ package be.devine.cp3 {
 import be.devine.cp3.model.AppModel;
 import be.devine.cp3.util.BookXMLParser;
 import be.devine.cp3.view.Book;
+import be.devine.cp3.view.Timeline;
 
-import starling.core.Starling;
 
 import starling.display.Sprite;
 
@@ -28,6 +28,9 @@ public class Application extends Sprite
 
         var book:Book = new Book();
         addChild(book);
+
+        var timeline:Timeline = new Timeline();
+        addChild(timeline);
     }
 }
 }
