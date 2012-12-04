@@ -10,7 +10,6 @@ import be.devine.cp3.model.AppModel;
 import be.devine.cp3.view.components.ScrollBar;
 import be.devine.cp3.view.components.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
-import be.devine.cp3.view.components.text.MyTextField;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
@@ -24,7 +23,9 @@ import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.events.Touch;
 import starling.events.TouchEvent;
+import starling.events.TouchPhase;
 
 public class Timeline extends Sprite{
 
@@ -33,6 +34,7 @@ public class Timeline extends Sprite{
     private var _container:Sprite;
     private var _scrollBar:ScrollBar;
     private var _timelineBTN:CurrentPageButton;
+    private var _currentThumb:Quad;
     private var _pages:Vector.<Page>;
 
     public function Timeline() {
@@ -44,6 +46,11 @@ public class Timeline extends Sprite{
         _background =  new Quad(148,stage.stageHeight,_appModel.bookVO.themeColor);
         _background.x = stage.stageWidth - 148;
         addChild(_background);
+
+        _currentThumb = new Quad(138,110,0xffffff);
+        addChild(_currentThumb);
+        _currentThumb.y = 6;
+        _currentThumb.x = _background.x;
 
         _container = new Sprite();
         _container.x = stage.stageWidth - 142;
@@ -58,6 +65,11 @@ public class Timeline extends Sprite{
             page.width = page.width * 0.1;
             page.height = page.height * 0.1;
             page.y = hulpY;
+
+            page.addEventListener(TouchEvent.TOUCH, pageChosen);
+            page.touchable = true;
+            page.setAsThumbnail();
+
             hulpY += page.height + 30;
             _pages.push(page);
         }
@@ -79,14 +91,33 @@ public class Timeline extends Sprite{
         _timelineBTN = new CurrentPageButton();
         addChild(_timelineBTN);
         _timelineBTN.x = stage.stageWidth - 188;
-        _timelineBTN.y = 301;
+        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
         _timelineBTN.touchable = true;
         _timelineBTN.addEventListener(starling.events.Event.TRIGGERED, showHideTimeline);
+
+
+        _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, updateIndex);
+    }
+
+    private function updateIndex(event:flash.events.Event):void {
+        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
+        _currentThumb.y = _pages[_appModel.currentPageIndex].y - 4;
+    }
+
+    private function pageChosen(event:TouchEvent):void {
+        trace('[TIMELINE]: page clicked');
+        var touch:Touch = event.getTouch(stage);
+        var target:Page = event.currentTarget as Page;
+        if(touch.phase == TouchPhase.ENDED ){
+            _appModel.currentPageIndex = _pages.indexOf(target);
+            _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
+            _currentThumb.y = _pages[_appModel.currentPageIndex].y - 4;
+        }
     }
 
     private function showHideTimeline(event:starling.events.Event):void {
         trace('[TIMELINE]: show or hide TimeLine');
-        var t:Tween = new Tween(this, 1, Transitions.EASE_IN);
+        var t:Tween = new Tween(this, 0.5, Transitions.EASE_IN);
         if(this.x == 0)
         {
             t.animate("x", 148);
