@@ -9,9 +9,12 @@ package be.devine.cp3.view.gallery
 {
 
 import be.devine.cp3.model.GalleryModel;
+import be.devine.cp3.util.AlignUtil;
 import be.devine.cp3.util.queue.Queue;
 import be.devine.cp3.vo.GalleryVO;
 import be.devine.cp3.vo.ImageVO;
+
+import starling.core.Starling;
 
 import starling.display.Sprite;
 
@@ -30,6 +33,8 @@ public class Gallery extends Sprite
 
         _thumbnails = new Thumbnails(_galleryVO.images);
         addChild(_thumbnails);
+
+        AlignUtil.alignToStage(_thumbnails,Starling.current.stage,AlignUtil.BOTTOM, AlignUtil.CENTER);
     }
 
     private function goToNextImage():void
