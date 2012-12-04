@@ -59,7 +59,7 @@ public class Page extends Sprite
             _bodyTXT.vAlign=VAlign.BOTTOM;
             addChild(_bodyTXT);
 
-            var bodyBackground = new Shape();
+            var bodyBackground:Shape = new Shape();
             bodyBackground.graphics.beginFill(0xFFFFFF);
             bodyBackground.graphics.drawRect(0,0,_bodyTXT.width+_bodyTXT.x+20,stage.stageHeight);
             bodyBackground.graphics.endFill();

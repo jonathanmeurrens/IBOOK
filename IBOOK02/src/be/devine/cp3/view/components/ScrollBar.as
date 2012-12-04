@@ -11,6 +11,7 @@ import flash.geom.Point;
 import starling.display.Quad;
 
 import starling.display.Sprite;
+import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
