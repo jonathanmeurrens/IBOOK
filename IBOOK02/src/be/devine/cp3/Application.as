@@ -33,8 +33,9 @@ public class Application extends Sprite
         var book:Book = new Book();
         addChild(book);
 
-        /*var timeline:Timeline = new Timeline();
-        addChild(timeline);*/
+        var timeline:Timeline = new Timeline();
+        addChild(timeline);
+        //bla
     }
 }
 }
