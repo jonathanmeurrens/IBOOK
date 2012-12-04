@@ -24,17 +24,20 @@ public class MyTextField extends TextField{
         vAlign = VAlign.TOP;
         hAlign = HAlign.LEFT;
 
-        checkTextHeight();
+        checkTextSize();
     }
 
     override public function set text(value:String):void {
         super.text = value;
-        checkTextHeight();
+        checkTextSize();
     }
 
-    private function checkTextHeight():void{
+    private function checkTextSize():void{
         if (this.height < this.textBounds.height) {
             this.height = this.textBounds.height + 4;
+        }
+        if (this.width < this.textBounds.width) {
+            this.width = this.textBounds.width + 4;
         }
     }
 }
