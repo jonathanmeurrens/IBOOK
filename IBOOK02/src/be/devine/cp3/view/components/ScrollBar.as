@@ -53,7 +53,7 @@ public class ScrollBar extends Sprite{
         {
             _position = value;
 
-            //dispatchEvent(new Event(POSITION_UPDATED));
+            dispatchEvent(new Event(POSITION_UPDATED));
         }
     }
 

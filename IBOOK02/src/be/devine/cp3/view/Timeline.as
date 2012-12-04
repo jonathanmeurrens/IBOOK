@@ -16,6 +16,7 @@ import flash.events.Event;
 import starling.display.Quad;
 
 import starling.display.Sprite;
+import starling.events.Event;
 
 public class Timeline extends Sprite{
 
@@ -29,7 +30,7 @@ public class Timeline extends Sprite{
         _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
     }
 
-    private function bookChangedHandler(event:Event):void {
+    private function bookChangedHandler(event:flash.events.Event):void {
         _background =  new Quad(300,stage.stageHeight,0x31f1dd);
         _background.x = stage.stageWidth - 300;
         addChild(_background);
@@ -59,6 +60,11 @@ public class Timeline extends Sprite{
         _scrollBar.x = stage.stageWidth - 10;
         _scrollBar.y = 0;
         addChild(_scrollBar);
+        _scrollBar.addEventListener(ScrollBar.POSITION_UPDATED, scrollbarUpdatedHandler);
+    }
+
+    private function scrollbarUpdatedHandler(event:starling.events.Event):void {
+        _container.y = _scrollBar.position * 100;
     }
 }
 }
