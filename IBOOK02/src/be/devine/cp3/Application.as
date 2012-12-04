@@ -54,7 +54,7 @@ public class Application extends Sprite
                 break;
             case Keyboard.RIGHT :
                 _appModel.goToNextPage();
-                break;
+            break;
         }
     }
 }
