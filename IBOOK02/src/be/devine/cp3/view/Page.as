@@ -9,10 +9,6 @@ package be.devine.cp3.view
 {
 
 import be.devine.cp3.factory.view.ComponentViewFactory;
-import be.devine.cp3.util.AlignUtil;
-import be.devine.cp3.view.components.buttons.NextPageBtn;
-import be.devine.cp3.view.components.text.Body;
-import be.devine.cp3.view.components.text.Title;
 import be.devine.cp3.view.gallery.Gallery;
 import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
@@ -24,7 +20,6 @@ import starling.core.Starling;
 import starling.display.DisplayObject;
 
 import starling.display.Sprite;
-import starling.events.Event;
 
 public class Page extends Sprite
     {

@@ -40,6 +40,7 @@ public class ScrollBar extends Sprite{
     }
     private function createThumb():void{
         _thumb = new Quad(_config.width,_config.thumbheight,_config.thumbcolor);
+        _thumb.alpha = 0.6;
         addChild(_thumb);
     }
 
