@@ -5,7 +5,9 @@
  * Time: 13:51
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components {
+package be.devine.cp3.view.components.ScrollBar {
+import be.devine.cp3.view.components.*;
+
 import flash.geom.Point;
 
 import starling.display.Quad;
@@ -83,6 +85,17 @@ public class ScrollBar extends Sprite{
     private function updatePosition():void
     {
         position = _thumb.y / (_config.height-_config.thumbheight);
+    }
+
+    public function setThumbPosition(positie:Number):void{
+        if (positie<1)
+        {
+            _thumb.y = positie * (_config.height-_config.thumbheight);
+        }
+        else
+        {
+            _thumb.y = 1 * (_config.height-_config.thumbheight);
+        }
     }
 }
 }
