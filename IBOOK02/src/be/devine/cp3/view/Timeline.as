@@ -7,8 +7,8 @@
  */
 package be.devine.cp3.view {
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.view.components.ScrollBar;
-import be.devine.cp3.view.components.ScrollBarOptions;
+import be.devine.cp3.view.components.ScrollBar.ScrollBar;
+import be.devine.cp3.view.components.ScrollBar.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
 import be.devine.cp3.vo.PageVO;
 
@@ -102,12 +102,15 @@ public class Timeline extends Sprite{
             timelineY = 364;
             currentY = 324;
             containerY = -122 * (_appModel.currentPageIndex - 3);
+            var scrollbarY:Number =  -(containerY)/(_container.height-425);
+            _scrollBar.setThumbPosition(scrollbarY);
         }
         else
         {
             timelineY = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
             currentY = _pages[_appModel.currentPageIndex].y - 6;
             containerY = 0;
+            _scrollBar.setThumbPosition(0);
         }
 
         timelineTween.animate("y", timelineY);
@@ -141,7 +144,8 @@ public class Timeline extends Sprite{
     }
 
     private function scrollbarUpdatedHandler(event:starling.events.Event):void {
-        var containerY:uint = -((_container.height - 800) * _scrollBar.position);
+        var containerY:int = Math.floor(-((_container.height - 425) * _scrollBar.position));
+        trace(containerY);
         _container.y = containerY;
     }
 
@@ -152,7 +156,7 @@ public class Timeline extends Sprite{
         var config:ScrollBarOptions = new ScrollBarOptions();
         config.height = stage.stageHeight;
         config.width = 7;
-        config.thumbcolor = 0x444444;
+        config.thumbcolor = 0xFFFFFF;
         config.thumbheight = 40;
         config.trackcolor = _appModel.bookVO.themeColor;
 

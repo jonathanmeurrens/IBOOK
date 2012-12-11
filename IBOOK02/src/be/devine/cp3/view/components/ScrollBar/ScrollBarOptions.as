@@ -5,7 +5,7 @@
  * Time: 15:57
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components {
+package be.devine.cp3.view.components.ScrollBar {
 public class ScrollBarOptions {
     private var _width:Number;
     private var _height:Number;
