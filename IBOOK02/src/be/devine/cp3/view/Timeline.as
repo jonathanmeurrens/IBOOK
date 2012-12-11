@@ -43,7 +43,7 @@ public class Timeline extends Sprite{
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
     }
-
+    //TODO: titel tevoorschijn laten komen
     private function bookChangedHandler(event:flash.events.Event):void {
         //background timeline
         _background =  new Quad(130,stage.stageHeight,_appModel.bookVO.themeColor);
