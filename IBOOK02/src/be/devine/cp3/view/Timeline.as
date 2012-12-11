@@ -10,6 +10,7 @@ import be.devine.cp3.model.AppModel;
 import be.devine.cp3.view.components.ScrollBar.ScrollBar;
 import be.devine.cp3.view.components.ScrollBar.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
+import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
@@ -18,6 +19,7 @@ import starling.animation.Transitions;
 
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.DisplayObject;
 
 import starling.display.Quad;
 
@@ -43,7 +45,8 @@ public class Timeline extends Sprite{
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
     }
-    //TODO: titel tevoorschijn laten komen
+
+    //TODO: Default inklappen
     private function bookChangedHandler(event:flash.events.Event):void {
         //background timeline
         _background =  new Quad(130,stage.stageHeight,_appModel.bookVO.themeColor);
@@ -73,7 +76,7 @@ public class Timeline extends Sprite{
             page.y = hulpY;
             _container.addChild(page);
 
-            page.addEventListener(TouchEvent.TOUCH, pageChosen);
+            page.addEventListener(TouchEvent.TOUCH, pageTouch);
 
             hulpY += page.height + 35;
             _pages.push(page);
@@ -121,11 +124,23 @@ public class Timeline extends Sprite{
         Starling.juggler.add(containerTween);
     }
 
-    private function pageChosen(event:TouchEvent):void {
+    private function pageTouch(event:TouchEvent):void {
         var touch:Touch = event.getTouch(stage);
         var target:Page = event.currentTarget as Page;
         if(touch.phase == TouchPhase.ENDED ){
             _appModel.currentPageIndex = _pages.indexOf(target);
+        }
+        if(touch.phase == TouchPhase.HOVER)
+        {
+            //TODO: titel tevoorschijn laten komen
+          /* var components:Vector.<ComponentVO> = _appModel.bookVO.pages[_pages.indexOf(target)]._components;
+            for each(var object:DisplayObject in components)
+            {
+                if(object is Button)
+                {
+                    object.visible=false;
+                }
+            }*/
         }
     }
 
