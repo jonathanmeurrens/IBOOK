@@ -14,8 +14,11 @@ import be.devine.cp3.view.components.gallery.Gallery;
 import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
 
+import flash.geom.Rectangle;
+
 import starling.animation.Transitions;
 import starling.animation.Tween;
+import starling.core.RenderSupport;
 import starling.core.Starling;
 import starling.display.Button;
 import starling.display.DisplayObject;
@@ -101,6 +104,15 @@ public class Page extends Sprite
                 _foregroundContainer.x+=200;
             }
             Starling.juggler.add(tween);
+        }
+
+        public override function render(support:RenderSupport, alpha:Number):void
+        {
+            support.finishQuadBatch();
+            Starling.context.setScissorRectangle(new Rectangle(0,0,Starling.current.stage.stageWidth,Starling.current.stage.stageHeight));
+            super.render(support, alpha);
+            support.finishQuadBatch();
+            Starling.context.setScissorRectangle(null);
         }
     }
 }
