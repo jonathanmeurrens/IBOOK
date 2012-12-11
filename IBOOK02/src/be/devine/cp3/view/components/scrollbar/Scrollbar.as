@@ -1,20 +1,15 @@
 /**
  * Created with IntelliJ IDEA.
- * User: Jonathan
- * Date: 05/11/12
- * Time: 10:42
+ * User: thomasverleye
+ * Date: 2/10/12
+ * Time: 13:51
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.scrollbar
-{
-import be.devine.cp3.model.AppModel;
+package be.devine.cp3.view.components.scrollbar {
+import be.devine.cp3.view.components.*;
+import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
 
-import flash.display.Shape;
-import flash.events.MouseEvent;
-import flash.geom.Rectangle;
-
-import starling.display.DisplayObject;
-import starling.display.Quad;
+import flash.geom.Point;
 
 import starling.display.Quad;
 
@@ -24,85 +19,84 @@ import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 
-public class Scrollbar extends Sprite
-{
-    private var _appModel:AppModel;
-
-    private var _bounds:Rectangle;
-    private var _thumb:Quad;
+public class ScrollBar extends Sprite{
+    private var _config:ScrollBarOptions;
     private var _track:Quad;
-    private var _startY:uint=0;
 
+    private var _thumb:Quad;
 
-    public function Scrollbar()
-    {
-        _appModel = AppModel.getInstance();
-        display();
+    private var _position:Number;
+
+    public static const POSITION_UPDATED:String = 'POSITION_UPDATED';
+
+    public function ScrollBar(config:ScrollBarOptions) {
+        _config = config;
+        this.createTrack();
+        this.createThumb();
+        _thumb.addEventListener(TouchEvent.TOUCH, onTouch);
     }
 
 
-    private function display()
-    {
-        _track = new Quad(25,250,0x222222);
-       /* _track.graphics.beginFill(0x222222);
-        _track.graphics.drawRect(0,0,25,250);
-        _track.graphics.endFill();*/
+    private function createTrack():void{
+        _track = new Quad(_config.width,_config.height,_config.trackcolor);
         addChild(_track);
-
-        _thumb = new Quad(20, 90, 0x999999);
-        /*_thumb.graphics.beginFill(0x999999);
-        _thumb.graphics.drawRect(0,0,20,90);
-        _thumb.graphics.endFill();*/
+    }
+    private function createThumb():void{
+        _thumb = new Quad(_config.width,_config.thumbheight,_config.thumbcolor);
+        _thumb.alpha = 0.6;
         addChild(_thumb);
-        _thumb.addEventListener(TouchEvent.TOUCH, thumbTouchedHandler);
-        _bounds = new Rectangle(0,0,0,_track.height-_thumb.height);
     }
 
-    private function thumbTouchedHandler(e:TouchEvent):void
-    {
-        var touch:Touch = e.getTouch(e.currentTarget as DisplayObject);
 
-        if(touch!=null)
+    public function get position():Number {
+        return _position;
+    }
+
+    public function set position(value:Number):void {
+        if(_position != value)
         {
-            switch(touch.phase)
-            {
-                case TouchPhase.BEGAN:
-                        trace("BEGAN",touch.getLocation(this));
-                        _startY = touch.getLocation(this).y;
-                    break;
-                case TouchPhase.MOVED:
-                        var newYPos:int = touch.getLocation(this).y-_startY;
-                        trace("MOVED",touch.getLocation(this).y,newYPos,_startY);
-                        if(newYPos>=0 && newYPos<=_track.height-_thumb.height)
-                            _thumb.y = newYPos;
-                    break;
-                case TouchPhase.ENDED:
-                        trace("ENDED");
-                    break;
-            }
+            _position = value;
+
+            dispatchEvent(new Event(POSITION_UPDATED));
         }
     }
 
-    /*private function thumbMouseDownHandler(e:MouseEvent):void
-    {
-        e.target.startDrag(false,_bounds);
+    private function onTouch(event:TouchEvent):void {
+        var touch:Touch = event.getTouch(stage);
+        var position:Point = touch.getLocation(stage);
+        var target:Quad = event.target as Quad;
 
-        _thumb.removeEventListener(MouseEvent.MOUSE_DOWN, thumbMouseDownHandler);
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
-        stage.addEventListener(MouseEvent.MOUSE_UP, thumbMouseUpHandler);
+        if(touch.phase == TouchPhase.MOVED ){
+            if(position.y - target.height/2 < 0)
+            {
+                target.y = 0;
+            }
+            else if(position.y - target.height/2 > stage.stageHeight)
+            {
+                target.y = stage.stageHeight - target.height;
+            }
+            else
+            {
+                target.y = position.y - target.height/2;
+            }
+            updatePosition();
+        }
     }
 
-    private function mouseMoveHandler(e:MouseEvent):void
+    private function updatePosition():void
     {
-        _appModel.bodyScrollPosition = _thumb.y/(_track.height-_thumb.height);
+        position = _thumb.y / (_config.height-_config.thumbheight);
     }
 
-    private function thumbMouseUpHandler(e:MouseEvent):void
-    {
-        //_thumb.stopDrag();
-        stage.removeEventListener(MouseEvent.MOUSE_UP, thumbMouseUpHandler);
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
-        _thumb.addEventListener(MouseEvent.MOUSE_DOWN, thumbMouseDownHandler);
-    }*/
+    public function setThumbPosition(positie:Number):void{
+        if (positie<1)
+        {
+            _thumb.y = positie * (_config.height-_config.thumbheight);
+        }
+        else
+        {
+            _thumb.y = 1 * (_config.height-_config.thumbheight);
+        }
+    }
 }
 }
