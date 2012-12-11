@@ -11,10 +11,14 @@ import be.devine.cp3.model.AppModel;
 
 import flash.display.BitmapData;
 import flash.geom.Matrix;
+import flash.text.AntiAliasType;
+import flash.text.Font;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 import flashx.textLayout.formats.TextAlign;
+
+import starling.core.Starling;
 import starling.display.Image;
 import starling.display.Quad;
 import starling.display.Sprite;
@@ -34,6 +38,7 @@ public class TextFieldFactory
         textFormat.color=0x000000;
 
         var textfield:TextField = new TextField();
+        textfield.embedFonts=true;
         textfield.condenseWhite=true;
         textfield.wordWrap=true;
         textfield.multiline=true;
@@ -41,6 +46,7 @@ public class TextFieldFactory
         textfield.autoSize=TextFieldAutoSize.LEFT;
         textfield.htmlText = text;
         textfield.setTextFormat(textFormat);
+        textfield.antiAliasType = AntiAliasType.ADVANCED;
 
         var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
         snapshot.draw(textfield, new Matrix());
@@ -67,12 +73,15 @@ public class TextFieldFactory
         textFormat.size=46;
         textFormat.color=AppModel.getInstance().bookVO.fontColor;
 
-
         var textfield:TextField = new TextField();
+        textfield.defaultTextFormat = textFormat;
+        textfield.embedFonts=true;
         textfield.text = text.toUpperCase();
         textfield.wordWrap=true;
         textfield.multiline=true;
         textfield.setTextFormat(textFormat);
+        textfield.antiAliasType = AntiAliasType.ADVANCED;
+
         textfield.width=350;
         textfield.autoSize=TextFieldAutoSize.LEFT;
 
@@ -110,6 +119,7 @@ public class TextFieldFactory
         textfield.setTextFormat(textFormat);
         textfield.autoSize=TextFieldAutoSize.LEFT;
         textfield.width=170;
+        textfield.antiAliasType = AntiAliasType.ADVANCED;
 
         var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
         snapshot.draw(textfield, new Matrix());

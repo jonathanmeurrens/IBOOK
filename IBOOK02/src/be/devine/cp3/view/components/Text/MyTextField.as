@@ -13,12 +13,6 @@ import starling.utils.VAlign;
 
 public class MyTextField extends TextField{
 
-    [Embed(source="/../fonts/FuturaStd-CondensedBold.otf", embedAsCFF="false", fontFamily="FuturaCondensedBold")]
-    private static const FuturaCondensedBold:Class;
-
-    [Embed(source="/../fonts/Verdana.ttf", embedAsCFF="false", fontFamily="Verdana")]
-    private static const Verdana:Class;
-
     public function MyTextField(width:int, height:int, text:String, fontName:String = "Verdana", fontSize:Number = 12, color:uint=0, bold:Boolean=false)
     {
         super(width, height, text, fontName, fontSize, color, bold);

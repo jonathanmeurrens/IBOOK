@@ -6,7 +6,6 @@
             <title vAlign="center" hAlign="center">A fruit seller</title>
             <gallery>
                 <image url="assets/images/01.jpg" caption="A fruit seller"></image>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
             </gallery>
         </page>
         <page >

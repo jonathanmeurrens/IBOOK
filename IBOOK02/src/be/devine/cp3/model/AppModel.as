@@ -20,10 +20,11 @@ public class AppModel extends EventDispatcher{
 
     // page
     private var _currentPageIndex:int;
-    //private var _currentPage:PageVO; // TODO current page is niet nodig, de index is voldoende, AppModel herwerken
 
-    // scrollbar
-    private var _bodyScrollPosition:Number=0;
+    // loader progress
+    private var _pagesLoadedProgress:uint = 0;
+    private var _totalToLoad:uint = 0;
+
 
     //######
     //Events
@@ -31,6 +32,8 @@ public class AppModel extends EventDispatcher{
     public static const CURRENT_PAGE_CHANGED:String = "CURRENT_PAGE_CHANGED";
     public static const BOOK_CHANGED:String ="BOOK_CHANGED";
     public static const BODY_SCROLLBAR_CHANGED:String = "BODY_SCROLLBAR_CHANGED";
+    public static const PROGRESS_CHANGED:String = "PROGRESS_CHANGED";
+    //public static const PRELOADING_DONE:String = "PRELOADING_DONE";
 
     private static var instance:AppModel;
 
@@ -69,16 +72,6 @@ public class AppModel extends EventDispatcher{
             currentPageIndex=0;
     }
 
-    //has previous & next page
-
-    /*private function hasPrevious():Boolean{
-        return currentPageIndex > 0;
-    }
-
-    private function hasNext():Boolean{
-        return  (currentPageIndex > -1 && (currentPageIndex + 1) < _bookVO.pages.length);
-    }*/
-
     //#################
     //getters & setters
     //#################
@@ -114,34 +107,38 @@ public class AppModel extends EventDispatcher{
         }
     }
 
-    //currentPage
+    // progress changed
 
-   /* public function get currentPage():PageVO {
-        return _currentPage;
-    }
-
-    public function set currentPage(value:PageVO):void {
-        if(_currentPage != value)
-        {
-            _currentPage = value;
-            _currentPageIndex = _bookVO.pages.indexOf(_currentPage);
-            dispatchEvent(new Event(CURRENT_PAGE_CHANGED));
-        }
-    }*/
-
-    // body text scroll position
-
-    public function set bodyScrollPosition(value:Number):void
+    public function set pagesLoadedProgress(value:uint):void
     {
-        if(value!=_bodyScrollPosition)
+        trace("[AppModel loadingprogress]"+value);
+        if(value!=_pagesLoadedProgress)
         {
-            _bodyScrollPosition = value;
+            _pagesLoadedProgress = value;
+            dispatchEvent(new Event(AppModel.PROGRESS_CHANGED));
         }
     }
 
-    public function get bodyScrollPosition():Number
+    public function get pagesLoadedProgress():uint
     {
-        return _bodyScrollPosition;
+        return _pagesLoadedProgress;
+    }
+
+    public function set totalToLoad(value:uint):void
+    {
+        _totalToLoad = value;
+
+       /* if(_totalToLoad==_pagesLoadedProgress)
+        {
+            dispatchEvent(new Event(AppModel.PRELOADING_DONE));
+            trace("[AppModel] DONE REALLY DONE" );
+        }*/
+
+    }
+
+    public function get totalToLoad():uint
+    {
+        return _totalToLoad;
     }
 }
 }

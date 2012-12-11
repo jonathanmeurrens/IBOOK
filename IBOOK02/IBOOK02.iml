@@ -8,6 +8,9 @@
             <entry library-id="dca384e5-c445-4697-bb58-dc036a01d548">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-id="660daf06-f29d-4942-85c5-3dae6b87e461">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="4.6.0" />
         </dependencies>
@@ -31,6 +34,16 @@
         <properties id="dca384e5-c445-4697-bb58-dc036a01d548" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/starling.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="660daf06-f29d-4942-85c5-3dae6b87e461" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/fonts/fonts.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

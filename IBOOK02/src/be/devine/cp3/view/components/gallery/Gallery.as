@@ -39,8 +39,6 @@ public class Gallery extends Sprite
         _galleryModel.images = galleryVO.images;
 
         AlignUtil.alignToStage(_thumbnails,Starling.current.stage,AlignUtil.BOTTOM, AlignUtil.CENTER);
-        /*_thumbnails.x = Starling.current.stage.stageWidth/2-_thumbnails.width/2;
-        _thumbnails.y = Starling.current.stage.stageHeight-100;*/
     }
 
     private function setSlideshow():void
