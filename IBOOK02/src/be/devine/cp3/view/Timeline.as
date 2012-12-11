@@ -7,6 +7,7 @@
  */
 package be.devine.cp3.view {
 import be.devine.cp3.model.AppModel;
+import be.devine.cp3.util.PixelMaskDisplayObject;
 import be.devine.cp3.view.components.ScrollBar;
 import be.devine.cp3.view.components.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
@@ -29,6 +30,8 @@ import starling.events.TouchPhase;
 
 public class Timeline extends Sprite{
 
+    //variables
+
     private var _appModel:AppModel;
     private var _background:Quad;
     private var _container:Sprite;
@@ -43,65 +46,77 @@ public class Timeline extends Sprite{
     }
 
     private function bookChangedHandler(event:flash.events.Event):void {
-        _background =  new Quad(148,stage.stageHeight,_appModel.bookVO.themeColor);
-        _background.x = stage.stageWidth - 148;
+        //background timeline
+        _background =  new Quad(130,stage.stageHeight,_appModel.bookVO.themeColor);
+        _background.x = stage.stageWidth - 130;
         addChild(_background);
 
-        _currentThumb = new Quad(138,110,0xffffff);
+        //aanduiden welke page geseleteerd is
+        _currentThumb = new Quad(120,110,0xffffff);
         addChild(_currentThumb);
         _currentThumb.y = 6;
         _currentThumb.x = _background.x;
 
+        //container waarin alle pages staan
         _container = new Sprite();
-        _container.x = stage.stageWidth - 142;
+        _container.x = stage.stageWidth - 124;
         addChild(_container);
 
+        //toevoegen van de pages
         _pages = new Vector.<Page>();
         var hulpY:int = 10;
         for each(var pageVO:PageVO in _appModel.bookVO.pages)
         {
             var page:Page = new Page(pageVO);
-            _container.addChild(page);
-            page.width = page.width * 0.1;
-            page.height = page.height * 0.1;
+            page.width = 95;
+            page.height = 75;
+            page.setAsThumbnail();
             page.y = hulpY;
+            _container.addChild(page);
 
             page.addEventListener(TouchEvent.TOUCH, pageChosen);
-            page.touchable = true;
-            page.setAsThumbnail();
 
             hulpY += page.height + 30;
             _pages.push(page);
         }
 
-        var config:ScrollBarOptions = new ScrollBarOptions();
-        config.height = stage.stageHeight;
-        config.width = 7;
-        config.thumbcolor = 0x444444;
-        config.thumbheight = 40;
-        config.trackcolor = _appModel.bookVO.themeColor;
+        addScrollbar();
 
+        addTimelineBTN();
 
-        _scrollBar = new ScrollBar(config);
-        _scrollBar.x = stage.stageWidth - 10;
-        _scrollBar.y = 10;
-        addChild(_scrollBar);
-        _scrollBar.addEventListener(ScrollBar.POSITION_UPDATED, scrollbarUpdatedHandler);
-
-        _timelineBTN = new CurrentPageButton();
-        addChild(_timelineBTN);
-        _timelineBTN.x = stage.stageWidth - 188;
-        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
-        _timelineBTN.touchable = true;
-        _timelineBTN.addEventListener(starling.events.Event.TRIGGERED, showHideTimeline);
-
-
+        //luisteren naar het pagechanged event
         _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, updateIndex);
     }
 
     private function updateIndex(event:flash.events.Event):void {
-        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
-        _currentThumb.y = _pages[_appModel.currentPageIndex].y - 4;
+        //als de paginaindex > dan 3 dan moet _container verschuiven.
+        var timelineTween:Tween = new Tween(_timelineBTN, 0.5, Transitions.EASE_IN);
+        var currentTween:Tween = new Tween(_currentThumb, 0.5, Transitions.EASE_IN);
+        var containerTween:Tween = new Tween(_container, 1, Transitions.EASE_IN);
+
+        var timelineY:int = new int();
+        var currentY:int = new int();
+        var containerY:int = new int();
+
+        if (_appModel.currentPageIndex > 3)
+        {
+            timelineY = 364;
+            currentY = 324;
+            containerY = -105 * (_appModel.currentPageIndex - 3);
+        }
+        else
+        {
+            timelineY = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
+            currentY = _pages[_appModel.currentPageIndex].y - 4;
+            containerY = 0;
+        }
+
+        timelineTween.animate("y", timelineY);
+        currentTween.animate("y",currentY);
+        containerTween.animate("y", containerY);
+        Starling.juggler.add(timelineTween);
+        Starling.juggler.add(currentTween);
+        Starling.juggler.add(containerTween);
     }
 
     private function pageChosen(event:TouchEvent):void {
@@ -110,17 +125,15 @@ public class Timeline extends Sprite{
         var target:Page = event.currentTarget as Page;
         if(touch.phase == TouchPhase.ENDED ){
             _appModel.currentPageIndex = _pages.indexOf(target);
-            _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
-            _currentThumb.y = _pages[_appModel.currentPageIndex].y - 4;
         }
     }
 
     private function showHideTimeline(event:starling.events.Event):void {
         trace('[TIMELINE]: show or hide TimeLine');
-        var t:Tween = new Tween(this, 0.5, Transitions.EASE_IN);
+        var t:Tween = new Tween(this, 0.1, Transitions.EASE_IN);
         if(this.x == 0)
         {
-            t.animate("x", 148);
+            t.animate("x", 130);
         }
         else
         {
@@ -130,7 +143,39 @@ public class Timeline extends Sprite{
     }
 
     private function scrollbarUpdatedHandler(event:starling.events.Event):void {
-        _container.y = _scrollBar.position * 100;
+        var containerY:uint = -((_container.height - 800) * _scrollBar.position);
+        _container.y = containerY;
+    }
+
+    //scrollbar toevoegen
+
+    private function addScrollbar():void{
+        //opmaak van de Scrollbar
+        var config:ScrollBarOptions = new ScrollBarOptions();
+        config.height = stage.stageHeight;
+        config.width = 7;
+        config.thumbcolor = 0x444444;
+        config.thumbheight = 40;
+        config.trackcolor = _appModel.bookVO.themeColor;
+
+        //scrollbar toevoegen
+        _scrollBar = new ScrollBar(config);
+        _scrollBar.x = stage.stageWidth - 9;
+        _scrollBar.y = 10;
+        addChild(_scrollBar);
+        _scrollBar.addEventListener(ScrollBar.POSITION_UPDATED, scrollbarUpdatedHandler);
+    }
+
+    //TimelineButton toevoegen
+
+    private function addTimelineBTN():void{
+        //button om timeline tevoorschijn te laten komen
+        _timelineBTN = new CurrentPageButton();
+        addChild(_timelineBTN);
+        _timelineBTN.x = stage.stageWidth - 170;
+        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
+        _timelineBTN.touchable = true;
+        _timelineBTN.addEventListener(starling.events.Event.TRIGGERED, showHideTimeline);
     }
 }
 }
