@@ -50,11 +50,13 @@ public class Application extends Sprite
         var key:uint = event.keyCode;
         switch (key) {
             case Keyboard.LEFT :
+            case Keyboard.UP:
                 _appModel.goToPreviousPage();
                 break;
             case Keyboard.RIGHT :
+            case Keyboard.DOWN:
                 _appModel.goToNextPage();
-            break;
+                break;
         }
     }
 }

@@ -27,7 +27,6 @@ public class XMLParser
 
     private function xmlLoadingDoneHandler(e:Event):void
     {
-        trace("[XMLParser] parsing");
         parseXML(XML(URLLoaderTask(e.target).data));
     }
 

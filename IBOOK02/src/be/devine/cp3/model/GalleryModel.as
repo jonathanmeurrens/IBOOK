@@ -13,27 +13,15 @@ import flash.events.EventDispatcher;
 
 public class GalleryModel extends EventDispatcher{
 
-    private static var instance:GalleryModel;
+    public static const IMAGES_CHANGED:String = "imagesChanged";
+    public static const SELECTED_INDEX_CHANGED:String = "selectedIndexChanged";
 
-    public static const IMAGES_CHANGED:String = "IMAGES_CHANGED";
-    public static const SELECTED_INDEX_CHANGED:String = "SELECTED_INDEX_CHANGED";
-
-    private var _selectedImageIndex:uint;
+    private var _selectedImageIndex:uint=-1;
     private var _images:Vector.<ImageVO>;
+    private var _isAnimationsOn:Boolean=false;
 
-    public static function getInstance():GalleryModel
+    public function GalleryModel()
     {
-        if(instance == null) {
-            instance = new GalleryModel(new Enforcer());
-        }
-        return instance;
-    }
-
-    public function GalleryModel(e:Enforcer)
-    {
-        if(e == null) {
-            throw new Error("AppModel is a singleton, use getInstance() instead");
-        }
     }
 
     public function goToPreviousImage():void
@@ -77,8 +65,20 @@ public class GalleryModel extends EventDispatcher{
         {
             _images = value;
             dispatchEvent(new Event(GalleryModel.IMAGES_CHANGED));
+            selectedImageIndex=0;
         }
+    }
+
+    public function get selectedImage():ImageVO{
+        return images[_selectedImageIndex];
+    }
+
+    public function get isAnimationsOn():Boolean {
+        return _isAnimationsOn;
+    }
+
+    public function set isAnimationsOn(value:Boolean):void {
+        _isAnimationsOn = value;
     }
 }
 }
-internal class Enforcer{};

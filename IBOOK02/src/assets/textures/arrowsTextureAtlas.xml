@@ -1,0 +1,4 @@
+<TextureAtlas imagePath="assets/textures/satlas.png">
+    <SubTexture name="lArrow" x="0" y="0" width="29" height="12"/>;
+    <SubTexture name="rArrow" x="29" y="0" width="29" height="12"/>;
+</TextureAtlas>

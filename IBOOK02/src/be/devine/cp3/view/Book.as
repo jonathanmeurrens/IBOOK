@@ -29,8 +29,6 @@ public class Book extends Sprite
             _appModel = AppModel.getInstance();
             _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
             _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, pageChangedHandler);
-
-
         }
 
         private function bookChangedHandler(e:Event):void
@@ -40,19 +38,27 @@ public class Book extends Sprite
             for each(var pageVO:PageVO in _appModel.bookVO.pages)
             {
                 var page:Page = new Page(pageVO);
-                addChild(page);
                 page.x = xPos;
+                addChild(page);
                 xPos+=stage.stageWidth;
                 _pages.push(page);
             }
+            _pages[0].toggleAnimations();
         }
 
         private function pageChangedHandler(e:Event):void
         {
+            var currentPage:Page = _pages[_appModel.currentPageIndex];
+            currentPage.toggleAnimations();
             if(_appModel.currentPageIndex>0)
-                Page(_pages[_appModel.currentPageIndex-1]).transitionOut();
-            Page(_pages[_appModel.currentPageIndex]).transitionIn();
+            {
+                var prevPage:Page = _pages[_appModel.currentPageIndex-1];
+                Page(prevPage.transitionOut());
+                prevPage.toggleAnimations();
+            }
+            Page(currentPage.transitionIn());
 
+            // beweeg gans het book zodat de juiste pagina zichtbaar wordt => pageIndex*stage.stageWidth
             var tween:Tween = new Tween(this, 2, Transitions.EASE_IN_OUT);
             tween.animate("x",-(_appModel.currentPageIndex)*stage.stageWidth);
             Starling.juggler.add(tween);

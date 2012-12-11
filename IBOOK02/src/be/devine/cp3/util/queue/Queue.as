@@ -50,7 +50,6 @@ public class Queue extends EventDispatcher
 		{
 			if(currentTasks.length < maxSimultaneousTasks && tasksToExecute.length > 0)
 			{
-				trace("execute");
 				var task:IQueueTask = tasksToExecute.shift();
 				task.addEventListener(Event.COMPLETE, itemCompleteHandler);
 				currentTasks.push(task);
@@ -67,7 +66,6 @@ public class Queue extends EventDispatcher
 		
 		private function itemCompleteHandler(event:Event):void
 		{
-			trace("item complete");
 			var index:int = currentTasks.indexOf(event.target);
 			if(index > -1)
 			{

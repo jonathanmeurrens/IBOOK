@@ -22,7 +22,7 @@ public class CurrentPageButton extends Button{
     private var _pageNumber:MyTextField;
     private var _appModel:AppModel;
 
-    public function CurrentPageButton() {
+    public function CurrentPageButton(){
         _appModel = AppModel.getInstance();
 
         // button background
@@ -33,8 +33,6 @@ public class CurrentPageButton extends Button{
 
         var bmpData:BitmapData = new BitmapData(background.width, background.height, true, 0x0);
         bmpData.draw(background);
-
-
 
         super(Texture.fromBitmapData(bmpData));
 

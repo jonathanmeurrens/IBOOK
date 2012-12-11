@@ -105,7 +105,6 @@ public class Timeline extends Sprite{
     }
 
     private function pageChosen(event:TouchEvent):void {
-        trace('[TIMELINE]: page clicked');
         var touch:Touch = event.getTouch(stage);
         var target:Page = event.currentTarget as Page;
         if(touch.phase == TouchPhase.ENDED ){

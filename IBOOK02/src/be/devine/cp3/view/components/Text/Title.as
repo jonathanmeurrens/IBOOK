@@ -6,30 +6,21 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.view.components.text {
-import be.devine.cp3.model.AppModel;
+import be.devine.cp3.factory.view.TextFieldFactory;
 import be.devine.cp3.util.AlignUtil;
 import be.devine.cp3.vo.TitleVO;
 
 import starling.core.Starling;
-import starling.display.Quad;
+import starling.display.Sprite;
 
-public class Title extends MyTextField
+public class Title extends Sprite
 {
-    private var _background:Quad;
-    private var _appModel:AppModel;
     private var _titleVO:TitleVO;
 
     public function Title(titleVO:TitleVO)
     {
-        _appModel = AppModel.getInstance();
         _titleVO = titleVO;
-
-        super(1,1,_titleVO.title.toUpperCase(),"Didot",30,_appModel.bookVO.fontColor);
-
-        _background = new Quad(width+20,height,_appModel.bookVO.themeColor);
-        _background.x -= 10;
-        addChild(_background);
-        setChildIndex(_background,0);
+        addChild(TextFieldFactory.createTitleText(_titleVO.title));
 
         AlignUtil.alignToStage(this,Starling.current.stage,titleVO.vAlign, titleVO.hAlign);
     }

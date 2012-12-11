@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.vo {
+import be.devine.cp3.util.AlignUtil;
+
 public class LinkVO extends ComponentVO
 {
     private var _id:uint = 0;
@@ -13,7 +15,8 @@ public class LinkVO extends ComponentVO
 
     public function LinkVO()
     {
-
+        vAlign = AlignUtil.BOTTOM;
+        hAlign = AlignUtil.RIGHT;
     }
 
     public function get id():uint {

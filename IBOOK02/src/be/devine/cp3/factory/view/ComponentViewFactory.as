@@ -10,7 +10,7 @@ import be.devine.cp3.view.components.Component;
 import be.devine.cp3.view.components.buttons.NextPageBtn;
 import be.devine.cp3.view.components.text.Body;
 import be.devine.cp3.view.components.text.Title;
-import be.devine.cp3.view.gallery.Gallery;
+import be.devine.cp3.view.components.gallery.Gallery;
 import be.devine.cp3.vo.BodyVO;
 import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.GalleryVO;

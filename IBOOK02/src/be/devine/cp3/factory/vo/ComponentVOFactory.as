@@ -61,8 +61,12 @@ public class ComponentVOFactory
     public static function createLinkVOFromXML(elementXML:XML):LinkVO
     {
         var linkVO:LinkVO = new LinkVO();
-        linkVO.id = elementXML.@id;
+        linkVO.id = elementXML.@to;
         linkVO.label = elementXML;
+        linkVO.hAlign = elementXML.@hAlign;
+        linkVO.vAlign = elementXML.@vAlign;
+        linkVO.xOffset = elementXML.@xOffset;
+        linkVO.yOffset = elementXML.@yOffset;
         return linkVO;
     }
 
@@ -72,6 +76,15 @@ public class ComponentVOFactory
         imageVO.caption = elementXML.@caption;
         imageVO.url = elementXML.@url;
         return imageVO;
+    }
+
+    private static function Parserover_feature(textXML:XML):String {
+
+        var s:String = textXML;
+        s = s.replace(/(?:<br>)+/gi, '<br>');
+        s = s.replace(/\n/g, '');
+        //container.info_txt.htmlText = s
+       return s;
     }
 }
 }
