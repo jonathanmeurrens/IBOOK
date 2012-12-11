@@ -44,7 +44,6 @@ public class Book extends Sprite
                 _pages.push(page);
             }
             _pages[0].toggleAnimations();
-            // comment
         }
 
         private function pageChangedHandler(e:Event):void

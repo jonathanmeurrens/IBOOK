@@ -1,5 +1,6 @@
 package be.devine.cp3.util.queue
 {
+import be.devine.cp3.model.AppModel;
 import be.devine.cp3.util.queue.tasks.IQueueTask;
 
 import flash.events.Event;
@@ -10,8 +11,9 @@ public class Queue extends EventDispatcher
 	{
 		
 		private var tasksToExecute:Array;
-		
 		private var _finishedTasks:Array;
+
+        private var _appModel:AppModel;
 
 		public function get finishedTasks():Array
 		{
@@ -22,19 +24,27 @@ public class Queue extends EventDispatcher
 		private var isRunning:Boolean;
 		private var totalTasks:uint;
 		private var maxSimultaneousTasks:uint;
+
+        //private var _trackForPageLoader:Boolean=false;
 		
 		public function Queue(maxSimultaneousTasks:uint = 1)
 		{
+           // _trackForPageLoader=trackForPageLoader;
+
 			this.maxSimultaneousTasks = maxSimultaneousTasks;
 			tasksToExecute = [];
 			currentTasks = [];
 			_finishedTasks = [];
+
+            _appModel = AppModel.getInstance();
 		}
 		
 		public function add(task:IQueueTask):void
 		{
 			tasksToExecute.push(task);
 			totalTasks++;
+
+            _appModel.totalToLoad++;
 		}
 		
 		public function start():void
@@ -72,6 +82,9 @@ public class Queue extends EventDispatcher
 				currentTasks.splice(index, 1);
 			}
 			_finishedTasks.push(event.target);
+
+            _appModel.pagesLoadedProgress++;
+
 			loadNext();
 		}
 	}
