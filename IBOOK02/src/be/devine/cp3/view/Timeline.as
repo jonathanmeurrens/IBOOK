@@ -7,7 +7,6 @@
  */
 package be.devine.cp3.view {
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.util.PixelMaskDisplayObject;
 import be.devine.cp3.view.components.ScrollBar;
 import be.devine.cp3.view.components.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
