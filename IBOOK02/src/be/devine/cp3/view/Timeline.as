@@ -7,9 +7,9 @@
  */
 package be.devine.cp3.view {
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.view.components.ScrollBar.ScrollBar;
-import be.devine.cp3.view.components.ScrollBar.ScrollBarOptions;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
+import be.devine.cp3.view.components.scrollbar.ScrollBar;
+import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
