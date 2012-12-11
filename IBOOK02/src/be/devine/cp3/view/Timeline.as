@@ -58,16 +58,16 @@ public class Timeline extends Sprite{
 
         //container waarin alle pages staan
         _container = new Sprite();
-        _container.x = stage.stageWidth - 124;
+        _container.x = stage.stageWidth - 120;
         addChild(_container);
 
         //toevoegen van de pages
         _pages = new Vector.<Page>();
-        var hulpY:int = 10;
+        var hulpY:int = 13;
         for each(var pageVO:PageVO in _appModel.bookVO.pages)
         {
             var page:Page = new Page(pageVO);
-            page.width = 95;
+            page.width = 1002;
             page.height = 75;
             page.setAsThumbnail();
             page.y = hulpY;
@@ -75,7 +75,7 @@ public class Timeline extends Sprite{
 
             page.addEventListener(TouchEvent.TOUCH, pageChosen);
 
-            hulpY += page.height + 30;
+            hulpY += page.height + 35;
             _pages.push(page);
         }
 
@@ -89,9 +89,9 @@ public class Timeline extends Sprite{
 
     private function updateIndex(event:flash.events.Event):void {
         //als de paginaindex > dan 3 dan moet _container verschuiven.
-        var timelineTween:Tween = new Tween(_timelineBTN, 0.5, Transitions.EASE_IN);
-        var currentTween:Tween = new Tween(_currentThumb, 0.5, Transitions.EASE_IN);
-        var containerTween:Tween = new Tween(_container, 1, Transitions.EASE_IN);
+        var timelineTween:Tween = new Tween(_timelineBTN, 0.5, Transitions.LINEAR);
+        var currentTween:Tween = new Tween(_currentThumb, 0.5, Transitions.LINEAR);
+        var containerTween:Tween = new Tween(_container, 1, Transitions.LINEAR);
 
         var timelineY:int = new int();
         var currentY:int = new int();
@@ -101,12 +101,12 @@ public class Timeline extends Sprite{
         {
             timelineY = 364;
             currentY = 324;
-            containerY = -105 * (_appModel.currentPageIndex - 3);
+            containerY = -122 * (_appModel.currentPageIndex - 3);
         }
         else
         {
             timelineY = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
-            currentY = _pages[_appModel.currentPageIndex].y - 4;
+            currentY = _pages[_appModel.currentPageIndex].y - 6;
             containerY = 0;
         }
 

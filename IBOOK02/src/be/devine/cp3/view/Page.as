@@ -66,6 +66,7 @@ public class Page extends Sprite
                     object.visible=false;
                 }
             }
+            _background.visible = false;
         }
 
         /*
