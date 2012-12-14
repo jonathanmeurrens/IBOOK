@@ -51,8 +51,8 @@ public class CurrentPageButton extends Button{
     private function addPageNumber():void
     {
         _pageNumber = TextFieldFactory.createPageNumber(String(_appModel.currentPageIndex+1));
-        _pageNumber.y = 2;
-        _pageNumber.x = 3;
+        _pageNumber.y = 5;
+        _pageNumber.x = 5;
         addChild(_pageNumber);
     }
 }

@@ -82,5 +82,29 @@ Ok, in Japan there are areas where the weather isn’t that extreme, but they st
                 <image url="assets/images/fun.jpg" caption="Chinese market"></image>
             </gallery>
         </page>
+        <page >
+            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <gallery>
+                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+            </gallery>
+        </page>
+        <page >
+            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <gallery>
+                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+            </gallery>
+        </page>
+        <page >
+            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <gallery>
+                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+            </gallery>
+        </page>
+        <page >
+            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <gallery>
+                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+            </gallery>
+        </page>
     </pages>
 </book>

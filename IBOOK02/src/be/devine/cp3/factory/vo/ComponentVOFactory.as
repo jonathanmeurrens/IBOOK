@@ -15,26 +15,25 @@ import be.devine.cp3.vo.TitleVO;
 
 public class ComponentVOFactory
 {
-    public static function createComponentVOFromXML(elementXML:XML):ComponentVO
+    /*public static function createComponentVOFromXML(elementXML:XML):ComponentVO
     {
-        trace(elementXML.localName());
+        //trace(elementXML.localName());
         switch(elementXML.localName())
         {
             case 'title':return createTitleVOFromXML(elementXML);
             case 'gallery':return createGalleryVOFromXML(elementXML);
             case 'body':return createBodyVOFromXML(elementXML);
             case 'link':return createLinkVOFromXML(elementXML);
-
         }
         return null;
-    }
+    }*/
 
     public static function createTitleVOFromXML(elementXML:XML):TitleVO
     {
         var titleVO:TitleVO = new TitleVO();
-        titleVO.hAlign = elementXML.@hAlign;
-        titleVO.vAlign = elementXML.@vAlign;
-        titleVO.title = elementXML;
+        titleVO.hAlign = elementXML.title.@hAlign;
+        titleVO.vAlign = elementXML.title.@vAlign;
+        titleVO.title = elementXML.title;
         return titleVO;
     }
 
@@ -42,7 +41,7 @@ public class ComponentVOFactory
     {
         var galleryVO:GalleryVO = new GalleryVO();
 
-        for each(var imageXML:XML in elementXML.image)
+        for each(var imageXML:XML in elementXML.gallery.image)
         {
             galleryVO.images.push(createImageVOFromXML(imageXML));
         }
@@ -52,21 +51,21 @@ public class ComponentVOFactory
     public static function createBodyVOFromXML(elementXML:XML):BodyVO
     {
         var bodyVO:BodyVO = new BodyVO();
-        bodyVO.body = elementXML;
-        bodyVO.hAlign = elementXML.@hAlign;
-        bodyVO.vAlign = elementXML.@vAlign;
+        bodyVO.body = elementXML.body;
+        bodyVO.hAlign = elementXML.body.@hAlign;
+        bodyVO.vAlign = elementXML.body.@vAlign;
         return bodyVO;
     }
 
     public static function createLinkVOFromXML(elementXML:XML):LinkVO
     {
         var linkVO:LinkVO = new LinkVO();
-        linkVO.id = elementXML.@to;
-        linkVO.label = elementXML;
-        linkVO.hAlign = elementXML.@hAlign;
-        linkVO.vAlign = elementXML.@vAlign;
-        linkVO.xOffset = elementXML.@xOffset;
-        linkVO.yOffset = elementXML.@yOffset;
+        linkVO.id = elementXML.link.@to;
+        linkVO.label = elementXML.link;
+        linkVO.hAlign = elementXML.link.@hAlign;
+        linkVO.vAlign = elementXML.link.@vAlign;
+        linkVO.xOffset = elementXML.link.@xOffset;
+        linkVO.yOffset = elementXML.link.@yOffset;
         return linkVO;
     }
 

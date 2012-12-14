@@ -15,15 +15,15 @@ public class PageVOFactory
     {
         var pageVO:PageVO = new PageVO();
 
-        for each(var componentXML:XML in pageXML.children())
+        pageVO.bodyVO = ComponentVOFactory.createBodyVOFromXML(pageXML);
+        pageVO.titleVO = ComponentVOFactory.createTitleVOFromXML(pageXML);
+        pageVO.galleryVO = ComponentVOFactory.createGalleryVOFromXML(pageXML);
+        pageVO.linkVO = ComponentVOFactory.createLinkVOFromXML(pageXML);
+
+        /*for each(var componentXML:XML in pageXML.children())
         {
             pageVO._components.push(ComponentVOFactory.createComponentVOFromXML(componentXML));
-        }
-
-        for each(var componentVO:ComponentVO in pageVO._components)
-        {
-            trace("[PageVOFactory] "+componentVO);
-        }
+        }*/
         /*pageVO.link = pageXML.link;
         pageVO.titleVO = ComponentVOFactory.createElementVOFromXML(pageXML.title);
         pageVO.bodyVO = ComponentVOFactory.createElementVOFromXML(pageXML.body);

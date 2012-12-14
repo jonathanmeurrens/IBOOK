@@ -11,6 +11,11 @@ import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
 
 import flash.geom.Point;
 
+import starling.animation.Transitions;
+
+import starling.animation.Tween;
+import starling.core.Starling;
+
 import starling.display.Quad;
 
 import starling.display.Sprite;
@@ -22,11 +27,9 @@ import starling.events.TouchPhase;
 public class ScrollBar extends Sprite{
     private var _config:ScrollBarOptions;
     private var _track:Quad;
-
     private var _thumb:Quad;
-
     private var _position:Number;
-
+    private var _automaticScroll:Boolean=true;
     public static const POSITION_UPDATED:String = 'POSITION_UPDATED';
 
     public function ScrollBar(config:ScrollBarOptions) {
@@ -53,11 +56,20 @@ public class ScrollBar extends Sprite{
     }
 
     public function set position(value:Number):void {
+        trace("[ScrollBar] position value: "+value);
         if(_position != value)
         {
-            _position = value;
-
+            if(value<=1 && value>=0)
+                _position = value;
+            else
+                _position=0;
+            trace("[ScrollBar] position: "+position);
             dispatchEvent(new Event(POSITION_UPDATED));
+
+            if(_automaticScroll)
+            {
+                updateThumbPosition();
+            }
         }
     }
 
@@ -71,7 +83,7 @@ public class ScrollBar extends Sprite{
             {
                 target.y = 0;
             }
-            else if(position.y - target.height/2 > stage.stageHeight)
+            else if(position.y + target.height > stage.stageHeight)
             {
                 target.y = stage.stageHeight - target.height;
             }
@@ -79,6 +91,7 @@ public class ScrollBar extends Sprite{
             {
                 target.y = position.y - target.height/2;
             }
+            _automaticScroll=false;
             updatePosition();
         }
     }
@@ -86,17 +99,13 @@ public class ScrollBar extends Sprite{
     private function updatePosition():void
     {
         position = _thumb.y / (_config.height-_config.thumbheight);
+        _automaticScroll=true;
     }
 
-    public function setThumbPosition(positie:Number):void{
-        if (positie<1)
-        {
-            _thumb.y = positie * (_config.height-_config.thumbheight);
-        }
-        else
-        {
-            _thumb.y = 1 * (_config.height-_config.thumbheight);
-        }
+    private function updateThumbPosition():void{
+        var tween:Tween = new Tween(_thumb,0.2,Transitions.LINEAR);
+        tween.animate('y',_position * (_config.height-_config.thumbheight));
+        Starling.juggler.add(tween);
     }
 }
 }

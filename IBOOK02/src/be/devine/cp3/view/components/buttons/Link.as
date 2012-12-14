@@ -17,12 +17,12 @@ import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 
-public class NextPageBtn extends Sprite{
+public class Link extends Sprite{
 
 
     private var _linkVO:LinkVO;
 
-    public function NextPageBtn(linkVO:LinkVO)
+    public function Link(linkVO:LinkVO)
     {
         _linkVO = linkVO;
 

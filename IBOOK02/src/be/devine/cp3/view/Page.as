@@ -8,36 +8,36 @@
 package be.devine.cp3.view
 {
 
-import be.devine.cp3.factory.view.ComponentViewFactory;
-import be.devine.cp3.view.components.buttons.NextPageBtn;
+import be.devine.cp3.view.components.buttons.Link;
 import be.devine.cp3.view.components.gallery.Gallery;
-import be.devine.cp3.vo.ComponentVO;
+import be.devine.cp3.view.components.text.Body;
+import be.devine.cp3.view.components.text.Title;
 import be.devine.cp3.vo.PageVO;
 
+import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.RenderSupport;
 import starling.core.Starling;
-import starling.display.Button;
-import starling.display.DisplayObject;
-import starling.display.Image;
 import starling.display.Quad;
 import starling.display.Sprite;
-import starling.textures.Texture;
-import starling.textures.TextureAtlas;
 
 public class Page extends Sprite
     {
         private var _pageVO:PageVO;
-        public var components:Vector.<DisplayObject>;
+
+        private var _title:Title;
+        private var _body:Body;
+        private var _gallery:Gallery;
+        private var _link:Link;
 
         private var _foregroundContainer:Sprite;
         private var _foregroundContainerIniX:int;
+
         private var _isAnimationsOn:Boolean=false;
         private var _background:Quad;
-
         private var _tween:Tween;
 
         public function Page(pageVO:PageVO)
@@ -47,30 +47,33 @@ public class Page extends Sprite
             _background = new Quad(Starling.current.stage.width, Starling.current.stage.height,0x00000);
             addChild(_background);
 
-            components = new Vector.<DisplayObject>();
-            for each(var componentVO:ComponentVO in _pageVO._components)
-            {
-                var component:DisplayObject = ComponentViewFactory.createFromVO(componentVO);
-                components.push(component);
-                if(component is Gallery)
-                    addChild(component);
-                else
-                    _foregroundContainer.addChild(component);
-                addChild(_foregroundContainer);
+            if(_pageVO.galleryVO.images.length>0){
+                _gallery = new Gallery(_pageVO.galleryVO);
+                addChild(_gallery);
             }
+
+            if(_pageVO.titleVO.title!=""){
+                _title = new Title(_pageVO.titleVO);
+                _foregroundContainer.addChild(_title);
+            }
+
+            if(_pageVO.bodyVO.body!=''){
+                _body = new Body(_pageVO.bodyVO);
+                _foregroundContainer.addChild(_body);
+            }
+
+            if(_pageVO.linkVO.label!=""){
+                _link = new Link(_pageVO.linkVO);
+                _foregroundContainer.addChild(_link);
+            }
+
+            addChild(_foregroundContainer);
             _foregroundContainerIniX = _foregroundContainer.x;
         }
 
         public function setAsThumbnail():void
         {
-            for each(var object:DisplayObject in components)
-            {
-                if(object is Button)
-                {
-                    object.visible=false;
-                }
-            }
-            _background.visible = false;
+            if(_link!=null)_link.visible=false;
         }
 
         /*
@@ -79,14 +82,9 @@ public class Page extends Sprite
 
         public function toggleAnimations():void
         {
-            for each(var object:DisplayObject in components)
-            {
-                if(object is Gallery)
-                {
-                    _isAnimationsOn = !_isAnimationsOn;
-                    Gallery(object).toggleAnimations(_isAnimationsOn);
-                }
-            }
+            _isAnimationsOn = !_isAnimationsOn;
+            if(_gallery!=null)
+                _gallery.toggleAnimations(_isAnimationsOn);
         }
 
         /*
@@ -111,13 +109,13 @@ public class Page extends Sprite
             Starling.juggler.add(_tween);
         }
 
-        /*public override function render(support:RenderSupport, alpha:Number):void
+        public override function render(support:RenderSupport, alpha:Number):void
         {
             support.finishQuadBatch();
-            Starling.context.setScissorRectangle(new Rectangle(0,0,Starling.current.stage.stageWidth,Starling.current.stage.stageHeight));
+            Starling.context.setScissorRectangle(new Rectangle(localToGlobal(new Point(0, 0)).x,localToGlobal(new Point(0, 0)).y,Starling.current.stage.stageWidth,Starling.current.stage.stageWidth));
             super.render(support, alpha);
             support.finishQuadBatch();
             Starling.context.setScissorRectangle(null);
-        }*/
+        }
     }
 }

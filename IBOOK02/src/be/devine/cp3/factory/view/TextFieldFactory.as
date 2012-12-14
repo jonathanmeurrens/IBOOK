@@ -12,13 +12,12 @@ import be.devine.cp3.model.AppModel;
 import flash.display.BitmapData;
 import flash.geom.Matrix;
 import flash.text.AntiAliasType;
-import flash.text.Font;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
+
 import flashx.textLayout.formats.TextAlign;
 
-import starling.core.Starling;
 import starling.display.Image;
 import starling.display.Quad;
 import starling.display.Sprite;
@@ -26,144 +25,170 @@ import starling.textures.Texture;
 
 public class TextFieldFactory
 {
-    public static function createBodyText(text:String):Sprite
+    private static var config:Object={
+        text:"undefined",
+        font:"Verdana",
+        leading:1.7,
+        size:15,
+        color:0x000000,
+        condenseWhite:false,
+        width:300,
+        backgroundColor:0xFFFFFF,
+        leftMargin:0,
+        topMargin:0,
+        uppercase:false,
+        underline:false,
+        textAlign:TextAlign.LEFT
+    };
+
+    public static function createText(config:Object):Sprite
     {
         var textContainer:Sprite = new Sprite();
 
         var textFormat:TextFormat = new TextFormat();
-        textFormat.align = TextAlign.LEFT;
-        textFormat.font="Verdana";
-        textFormat.leading=1.7;
-        textFormat.size=11;
-        textFormat.color=0x000000;
+        textFormat.align = config.textAlign;
+        textFormat.font=config.font;
+        textFormat.leading=config.leading;
+        textFormat.size=config.size;
+        textFormat.color=config.color;
+        textFormat.underline=config.underline;
 
         var textfield:TextField = new TextField();
         textfield.defaultTextFormat=textFormat;
         textfield.embedFonts=true;
-        textfield.condenseWhite=true;
+        textfield.condenseWhite=config.condenseWhite;
         textfield.wordWrap=true;
         textfield.multiline=true;
-        textfield.width=350;
+        textfield.width=config.width;
         textfield.autoSize=TextFieldAutoSize.LEFT;
-        textfield.htmlText = text;
+        textfield.htmlText = config.uppercase==true?String(config.text).toUpperCase():config.text;
         textfield.antiAliasType = AntiAliasType.ADVANCED;
 
         var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
         snapshot.draw(textfield, new Matrix());
 
-        var background:Quad = new Quad(textfield.width+50,textfield.height+50,0xFFFFFF);
-        textContainer.addChild(background);
-        textContainer.setChildIndex(background,0);
+        if(config.backgroundColor)
+        {
+            var background:Quad = new Quad(textfield.width+config.leftMargin*2,textfield.height+config.topMargin*2,config.backgroundColor);
+            textContainer.addChild(background);
+            textContainer.setChildIndex(background,0);
+        }
 
         var textImage:Image = new Image(Texture.fromBitmapData(snapshot));
         textContainer.addChild(textImage);
-        textImage.x = textImage.y = 25;
-
+        textImage.x = config.leftMargin;
+        textImage.y = config.topMargin;
         return textContainer;
+    }
+
+    public static function createBodyText(text:String):Sprite
+    {
+        config.text=text;
+        config.backgroundColor = 0xFFFFFF;
+        config.width = 350;
+        config.condenseWhite=true;
+        config.leading = 1.7;
+        config.font = "Verdana";
+        config.color = 0x000000;
+        config.size = 11;
+        config.uppercase = false;
+        config.leftMargin = 25;
+        config.topMargin = 25;
+        config.underline=false;
+        config.textAlign=TextAlign.LEFT;
+
+        return createText(config);
     }
 
     public static function createTitleText(text:String):Sprite
     {
-        var textContainer:Sprite = new Sprite();
+        config.text=text;
+        config.backgroundColor = AppModel.getInstance().bookVO.themeColor;
+        config.width = 350;
+        config.condenseWhite=true;
+        config.leading = 1.9;
+        config.font = "Futura Std Medium Condensed";
+        config.color = AppModel.getInstance().bookVO.fontColor;
+        config.size = 46;
+        config.uppercase = true;
+        config.leftMargin = 15;
+        config.topMargin = 20;
+        config.underline=false;
+        config.textAlign=TextAlign.LEFT;
 
-        var textFormat:TextFormat = new TextFormat();
-        textFormat.align = TextAlign.LEFT;
-        textFormat.font="Futura Std Medium Condensed";
-        textFormat.leading=1.9;
-        textFormat.size=46;
-        textFormat.color=AppModel.getInstance().bookVO.fontColor;
-
-        var textfield:TextField = new TextField();
-        textfield.defaultTextFormat = textFormat;
-        textfield.embedFonts=true;
-        textfield.text = text.toUpperCase();
-        textfield.wordWrap=true;
-        textfield.multiline=true;
-        textfield.setTextFormat(textFormat);
-        textfield.antiAliasType = AntiAliasType.ADVANCED;
-
-        textfield.width=350;
-        textfield.autoSize=TextFieldAutoSize.LEFT;
-
-        var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
-        snapshot.draw(textfield, new Matrix());
-
-        var background:Quad = new Quad(textfield.width+50,textfield.height+30,AppModel.getInstance().bookVO.themeColor);
-        textContainer.addChild(background);
-        textContainer.setChildIndex(background,0);
-
-        var textImage:Image = new Image(Texture.fromBitmapData(snapshot));
-        textContainer.addChild(textImage);
-        textImage.x = textImage.y = 18;
-
-        return textContainer;
+        return createText(config);
     }
 
     public static function createLinkText(label:String):Sprite
     {
-        var textContainer:Sprite = new Sprite();
+        config.text=label;
+        config.backgroundColor = AppModel.getInstance().bookVO.themeColor;
+        config.width = 170;
+        config.leading = 1.7;
+        config.font = "Verdana";
+        config.color = AppModel.getInstance().bookVO.fontColor;
+        config.size = 11;
+        config.uppercase = false;
+        config.leftMargin = 10;
+        config.topMargin = 10;
+        config.underline = true;
+        config.textAlign=TextAlign.LEFT;
 
-        var textFormat:TextFormat = new TextFormat();
-        textFormat.align = TextAlign.LEFT;
-        textFormat.font="Verdana";
-        textFormat.leading=1.7;
-        textFormat.size=11;
-        textFormat.underline=true;
-        textFormat.color=AppModel.getInstance().bookVO.fontColor;
-
-
-        var textfield:TextField = new TextField();
-        textfield.text = label;
-        textfield.wordWrap=true;
-        textfield.multiline=true;
-        textfield.setTextFormat(textFormat);
-        textfield.autoSize=TextFieldAutoSize.LEFT;
-        textfield.width=170;
-        textfield.antiAliasType = AntiAliasType.ADVANCED;
-
-        var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
-        snapshot.draw(textfield, new Matrix());
-
-        var background:Quad = new Quad(textfield.width+20,textfield.height+20,AppModel.getInstance().bookVO.themeColor);
-        textContainer.addChild(background);
-        textContainer.setChildIndex(background,0);
-
-        var textImage:Image = new Image(Texture.fromBitmapData(snapshot));
-        textContainer.addChild(textImage);
-        textImage.x = textImage.y = 10;
-
-        return textContainer;
+        return createText(config);
     }
 
     public static function createPageNumber(text:String):Sprite
     {
-        var textContainer:Sprite = new Sprite();
+        config.text=text;
+        config.backgroundColor = null;
+        config.width = 30;
+        config.leading = 1.7;
+        config.font = "Verdana";
+        config.color = AppModel.getInstance().bookVO.themeColor;
+        config.size = 12;
+        config.uppercase = false;
+        config.leftMargin = 0;
+        config.topMargin = 0;
+        config.underline = false;
+        config.textAlign=TextAlign.LEFT;
 
-        var textFormat:TextFormat = new TextFormat();
-        textFormat.align = TextAlign.LEFT;
-        textFormat.font="Verdana";
-        textFormat.leading=1.7;
-        textFormat.size=15;
-        textFormat.color=0x000000;
+        return createText(config);
+    }
 
-        var textfield:TextField = new TextField();
-        textfield.embedFonts=true;
-        textfield.condenseWhite=true;
-        textfield.wordWrap=true;
-        textfield.multiline=true;
-        textfield.width=20;
-        textfield.autoSize=TextFieldAutoSize.LEFT;
-        textfield.htmlText = text;
-        textfield.setTextFormat(textFormat);
-        textfield.antiAliasType = AntiAliasType.ADVANCED;
+    public static function createTitleLabel(text:String,width=100):Sprite
+    {
+        config.text=text;
+        config.backgroundColor = 0x111111;
+        config.leading = 1.5;
+        config.font = "Verdana";
+        config.color = 0xFFFFFF;
+        config.size = 9;
+        config.uppercase = false;
+        config.leftMargin = 5;
+        config.topMargin = 2;
+        config.underline = false;
+        config.width = width-config.leftMargin*2;
+        config.textAlign=TextAlign.LEFT;
 
-        var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
-        snapshot.draw(textfield, new Matrix());
+        return createText(config);
+    }
 
-        var textImage:Image = new Image(Texture.fromBitmapData(snapshot));
-        textContainer.addChild(textImage);
+    public static function createPreloaderText(text:String):Sprite
+    {
+        config.text=text;
+        config.backgroundColor = 0xFFFFFF;
+        config.leading = 1.5;
+        config.font = "Verdana";
+        config.color = 0x000000;
+        config.size = 9;
+        config.uppercase = false;
+        config.leftMargin = 5;
+        config.topMargin = 5;
+        config.underline = false;
+        config.width = 200;
+        config.textAlign=TextAlign.CENTER;
 
-        return textContainer;
+        return createText(config);
     }
 }
 }

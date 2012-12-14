@@ -11,14 +11,10 @@ import be.devine.cp3.model.AppModel;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
-import flash.geom.Rectangle;
 
 import starling.animation.Transitions;
-
 import starling.animation.Tween;
-import starling.core.RenderSupport;
 import starling.core.Starling;
-
 import starling.display.Sprite;
 
 public class Book extends Sprite
@@ -51,6 +47,7 @@ public class Book extends Sprite
         private function pageChangedHandler(e:Event):void
         {
             var currentPage:Page = _pages[_appModel.currentPageIndex];
+            currentPage.visible=true;
             currentPage.toggleAnimations();
             if(_appModel.currentPageIndex>0)
             {
@@ -69,7 +66,7 @@ public class Book extends Sprite
         /*public override function render(support:RenderSupport, alpha:Number):void
         {
             support.finishQuadBatch();
-            Starling.context.setScissorRectangle(new Rectangle(0,0,Starling.current.stage.stageWidth-200,Starling.current.stage.stageHeight-100));
+            Starling.context.setScissorRectangle(new Rectangle(localToGlobal(new Point(0, 0)).x,localToGlobal(new Point(0, 0)).y,Starling.current.stage.stageWidth,Starling.current.stage.stageWidth));
             super.render(support, alpha);
             support.finishQuadBatch();
             Starling.context.setScissorRectangle(null);

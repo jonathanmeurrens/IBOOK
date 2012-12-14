@@ -42,27 +42,6 @@ public class Main extends MovieClip {
                 width,
                 height
         );
-        stage.addEventListener(MouseEvent.MOUSE_DOWN,moveWindow);
-    }
-
-    private function moveWindow(event:MouseEvent):void {
-        this.stage.nativeWindow.startMove();
-    }
-
-    private function minimizeWindow():void {
-        this.stage.nativeWindow.minimize();
-    }
-
-    private function maximizeWindow():void {
-        this.stage.nativeWindow.maximize();
-    }
-
-    private function restoreWindow():void {
-        this.stage.nativeWindow.restore();
-    }
-
-    private function closeWindow():void {
-        this.stage.nativeWindow.close();
     }
 
 

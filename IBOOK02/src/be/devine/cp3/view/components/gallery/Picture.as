@@ -50,7 +50,6 @@ public class Picture extends Sprite
         {
             trace("[Picture] fade OUT current image");
             var tween:Tween = new Tween(_image, 0.5);
-            //tween.animate('alpha')
             tween.fadeTo(0);
             tween.onComplete=showImage;
             Starling.juggler.add(tween);
@@ -77,7 +76,6 @@ public class Picture extends Sprite
             trace("[Picture] fade IN next image");
             _image.alpha=0;
             var tween:Tween = new Tween(_image, 0.5);
-            //tween.animate('alpha')
             tween.fadeTo(1);
             Starling.juggler.add(tween);
         }

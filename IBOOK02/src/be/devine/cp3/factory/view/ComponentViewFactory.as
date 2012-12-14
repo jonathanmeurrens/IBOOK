@@ -7,7 +7,7 @@
  */
 package be.devine.cp3.factory.view {
 import be.devine.cp3.view.components.Component;
-import be.devine.cp3.view.components.buttons.NextPageBtn;
+import be.devine.cp3.view.components.buttons.Link;
 import be.devine.cp3.view.components.text.Body;
 import be.devine.cp3.view.components.text.Title;
 import be.devine.cp3.view.components.gallery.Gallery;
@@ -26,18 +26,38 @@ public class ComponentViewFactory
 
     }
 
-    public static function createFromVO(componentVO:ComponentVO):DisplayObject
+    /*public static function createFromVO(componentVO:ComponentVO):DisplayObject
     {
         if(componentVO is BodyVO)
             return new Body(componentVO as BodyVO);
         if(componentVO is TitleVO)
-            return new Title(componentVO as TitleVO);
+
         if(componentVO is GalleryVO)
             return new Gallery(componentVO as GalleryVO);
         if(componentVO is LinkVO)
             return new NextPageBtn(componentVO as LinkVO);
 
         return null;
+    }*/
+
+    public static function createFromTitleVO(titleVO:TitleVO):Title
+    {
+        return new Title(titleVO);
+    }
+
+    public static function createFromBodyVO(bodyVO:BodyVO):Body
+    {
+        return new Body(bodyVO);
+    }
+
+    public static function createFromGalleryVO(galleryVO:GalleryVO):Gallery
+    {
+        return new Gallery(galleryVO);
+    }
+
+    public static function createFromLinkVO(linkVO:LinkVO):Link
+    {
+        return new Link(linkVO);
     }
 }
 }

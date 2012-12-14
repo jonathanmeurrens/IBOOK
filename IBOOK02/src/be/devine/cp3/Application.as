@@ -47,41 +47,20 @@ public class Application extends Sprite
     {
         _appModel = AppModel.getInstance();
 
-        /*_background = new Shape();
-        _background.graphics.beginFill(0xEEEEEE);
-        _background.graphics.lineStyle(1,0xFFFFFF);
-        _background.graphics.drawRect(0,0,Starling.current.stage.stageWidth-10, Starling.current.stage.stageHeight-30);
-        _background.x=Starling.current.stage.stageWidth/2-_background.width/2;
-        _background.y=Starling.current.stage.stageHeight/2-_background.height/2;
-        _background.graphics.endFill();
-        var shadowFilter:DropShadowFilter = new DropShadowFilter();
-        shadowFilter.color = 0x000000;
-        shadowFilter.alpha = 0.60;
-        shadowFilter.blurX = 6;
-        shadowFilter.blurY = 6;
-        shadowFilter.distance = 0;
-        shadowFilter.angle = 90;
-        _background.filters = [shadowFilter];
-        var backgroundBitmap:BitmapData = new BitmapData(_background.width, _background.height,true,0x000000);
-        backgroundBitmap.draw(_background);
-        addChild(new Image(Texture.fromBitmapData(backgroundBitmap)));*/
-
+        _preloader = new Preloader();
+        addChild(_preloader);
+        _preloader.addEventListener(Preloader.PRELOADING_DONE, preloadingDoneHandler);
 
         // start loading the books content as XML and parse it, data stored in appModel
         var bookXMLParser:BookXMLParser = new BookXMLParser();
         bookXMLParser.parse("assets/book.xml");
 
         _book = new Book();
+        _book.alpha=0;
         addChild(_book);
 
         _timeline = new Timeline();
         addChild(_timeline);
-
-        _preloader = new Preloader();
-        addChild(_preloader);
-        _preloader.addEventListener(Preloader.PRELOADING_DONE, preloadingDoneHandler);
-
-        _book.alpha=0;
 
         addEventListener(Event.ADDED_TO_STAGE, init);
     }
@@ -110,7 +89,7 @@ public class Application extends Sprite
     private function preloadingDoneHandler(e:Event):void
     {
         // fade in book
-        var tween:Tween = new Tween(_book,2);
+        var tween:Tween = new Tween(_book,1);
         tween.delay=2.5;
         tween.fadeTo(1);
         Starling.juggler.add(tween);
@@ -119,7 +98,14 @@ public class Application extends Sprite
         var tween:Tween = new Tween(_preloader,0.3);
         tween.delay=2;
         tween.fadeTo(0);
+        tween.onComplete = function(){
+            _preloader.removeEventListener(Preloader.PRELOADING_DONE, preloadingDoneHandler);
+            removeChild(_preloader);
+            _preloader=null;
+        }
         Starling.juggler.add(tween);
+
+
     }
 }
 }

@@ -33,62 +33,56 @@ import starling.events.TouchPhase;
 public class Timeline extends Sprite{
 
     //variables
-
     private var _appModel:AppModel;
     private var _background:Quad;
     private var _container:Sprite;
     private var _scrollBar:ScrollBar;
     private var _timelineBTN:CurrentPageButton;
     private var _currentThumb:Quad;
-    private var _pages:Vector.<Page>;
-    private var _titles:Vector.<Title>;
+    private const CURRENT_THUMB_Y_OFFSET=5;
+    private var _thumbnails:Vector.<TimelineThumbnail>;
 
     public function Timeline() {
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.BOOK_CHANGED, bookChangedHandler);
     }
 
-    //TODO: Default inklappen
     private function bookChangedHandler(event:flash.events.Event):void {
-        //parameters instellen
-        _titles = new Vector.<Title>();
+        _thumbnails = new Vector.<TimelineThumbnail>();
 
         //background timeline
         _background =  new Quad(130,stage.stageHeight,_appModel.bookVO.themeColor);
-        _background.x = stage.stageWidth - 130;
+        _background.x = stage.stageWidth - _background.width;
         addChild(_background);
 
         //aanduiden welke page geseleteerd is
-        _currentThumb = new Quad(120,110,0xffffff);
+        _currentThumb = new Quad(_background.width-10,95,0xffffff);
         addChild(_currentThumb);
-        _currentThumb.y = 6;
+        _currentThumb.y = CURRENT_THUMB_Y_OFFSET;
         _currentThumb.x = _background.x;
 
         //container waarin alle pages staan
         _container = new Sprite();
         _container.x = stage.stageWidth - 120;
+        _container.addChild(_currentThumb);
         addChild(_container);
 
-        //toevoegen van de pages
-        _pages = new Vector.<Page>();
+
+        //toevoegen van de thumbnails
         var hulpY:int = 13;
         for each(var pageVO:PageVO in _appModel.bookVO.pages)
         {
-            var page:Page = new Page(pageVO);
-            page.width = 1002;
-            page.height = 75;
-            page.setAsThumbnail();
-            page.y = hulpY;
-            _container.addChild(page);
+            var thumb:TimelineThumbnail = new TimelineThumbnail(pageVO);
+            thumb.y = hulpY;
+            _container.addChild(thumb);
 
-            page.addEventListener(TouchEvent.TOUCH, pageTouch);
+            thumb.addEventListener(TouchEvent.TOUCH, thumbTouch);
 
-            hulpY += page.height + 35;
-            _pages.push(page);
+            hulpY += thumb.height + 10;
+            _thumbnails.push(thumb);
         }
 
         addScrollbar();
-
         addTimelineBTN();
 
         //luisteren naar het pagechanged event
@@ -102,47 +96,26 @@ public class Timeline extends Sprite{
         //als de paginaindex > dan 3 dan moet _container verschuiven.
         var timelineTween:Tween = new Tween(_timelineBTN, 0.2, Transitions.LINEAR);
         var currentTween:Tween = new Tween(_currentThumb, 0.2, Transitions.LINEAR);
-        var containerTween:Tween = new Tween(_container, 0.5, Transitions.LINEAR);
 
-        var timelineY:int = new int();
-        var currentY:int = new int();
-        var containerY:int = new int();
+        var timelineY:int;
+        var currentY:int;
 
-        if (_appModel.currentPageIndex > 3)
-        {
-            timelineY = 364;
-            currentY = 324;
-            containerY = -122 * (_appModel.currentPageIndex - 3);
-            var scrollbarY:Number =  -(containerY)/(_container.height-425);
-            _scrollBar.setThumbPosition(scrollbarY);
-        }
-        else
-        {
-            timelineY = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
-            currentY = _pages[_appModel.currentPageIndex].y - 6;
-            containerY = 0;
-            _scrollBar.setThumbPosition(0);
-        }
+        timelineY = _thumbnails[_appModel.currentPageIndex].y + _thumbnails[_appModel.currentPageIndex].height/2-15;
+        currentY = _thumbnails[_appModel.currentPageIndex].y-CURRENT_THUMB_Y_OFFSET;
+        _scrollBar.position = _thumbnails[_appModel.currentPageIndex].y/_container.height;
 
         timelineTween.animate("y", timelineY);
         currentTween.animate("y",currentY);
-        containerTween.animate("y", containerY);
+
         Starling.juggler.add(timelineTween);
         Starling.juggler.add(currentTween);
-        Starling.juggler.add(containerTween);
-
-        removeTitles();
     }
 
-    private function pageTouch(event:TouchEvent):void {
+    private function thumbTouch(event:TouchEvent):void {
         var touch:Touch = event.getTouch(stage);
-        var target:Page = event.currentTarget as Page;
+        var target:TimelineThumbnail = event.currentTarget as TimelineThumbnail;
         if(touch.phase == TouchPhase.ENDED ){
-            _appModel.currentPageIndex = _pages.indexOf(target);
-        }
-        if(touch.phase == TouchPhase.HOVER)
-        {
-                showTitle(target);
+            _appModel.currentPageIndex = _thumbnails.indexOf(target);
         }
     }
 
@@ -150,22 +123,17 @@ public class Timeline extends Sprite{
         trace('[TIMELINE]: show or hide TimeLine');
         var t:Tween = new Tween(this, 0.1, Transitions.EASE_IN);
         if(this.x == 0)
-        {
             t.animate("x", 130);
-            removeTitles();
-        }
         else
-        {
             t.animate("x", 0);
-        }
         Starling.juggler.add(t);
     }
 
     private function scrollbarUpdatedHandler(event:starling.events.Event):void {
         var containerY:int = Math.floor(-((_container.height - 425) * _scrollBar.position));
-        trace(containerY);
-        _container.y = containerY;
-        removeTitles();
+        var containerTween:Tween = new Tween(_container,0.2,Transitions.LINEAR);
+        containerTween.animate("y", containerY);
+        Starling.juggler.add(containerTween);
     }
 
     //scrollbar toevoegen
@@ -192,73 +160,11 @@ public class Timeline extends Sprite{
     private function addTimelineBTN():void{
         //button om timeline tevoorschijn te laten komen
         _timelineBTN = new CurrentPageButton();
-        addChild(_timelineBTN);
-        _timelineBTN.x = stage.stageWidth - 170;
-        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-11;
+        _container.addChild(_timelineBTN);
+        _timelineBTN.x = stage.stageWidth-_timelineBTN.width-width;
+        _timelineBTN.y = _thumbnails[_appModel.currentPageIndex].y + _thumbnails[_appModel.currentPageIndex].height/2-11;
         _timelineBTN.touchable = true;
         _timelineBTN.addEventListener(starling.events.Event.TRIGGERED, showHideTimeline);
-    }
-
-    // title show
-     private function showTitle(target:Page):void
-     {
-         var title:DisplayObject;
-         var components:Vector.<DisplayObject> = _pages[_pages.indexOf(target)].components;
-         for each(var object:DisplayObject in components)
-         {
-             if(object is Title)
-             {
-                 title = object;
-                 if(_titles.indexOf(title) == -1)
-                 {
-                     trace("[Timeline] Show Title");
-                     addChild(title);
-                     title.scaleX = title.scaleY = 0.5;
-                     title.x = _background.x - title.width;
-                     title.y = (target.y + target.height)-(target.height/2) - title.height/2 + _container.y;
-                     title.alpha = 1;
-                     _titles.push(title);
-                 }
-                 else
-                 {
-                     tweenOut(title);
-                 }
-             }
-         }
-     }
-
-    private function tweenOut(title:DisplayObject)
-    {
-        Starling.juggler.removeTweens(title);
-        var tweenOut:Tween = new Tween(title, 0.4,Transitions.LINEAR);
-        tweenOut.animate("alpha",0);
-        tweenOut.delay = 2;
-        tweenOut.onComplete = function(){
-            for(var i:int=0; i<_titles .length;i++){
-                if(_titles[i]==title){
-                    _titles.splice(i,1);
-                    i-=1;
-                    removeChild(title);
-                }
-            }
-        };
-        Starling.juggler.add(tweenOut);
-    }
-
-    private function removeTitles():void
-    {
-        for each(var title:Title in _titles)
-        {
-            title.alpha = 0;
-            Starling.juggler.removeTweens(title);
-            for(var i:int=0; i<_titles .length;i++){
-                if(_titles[i]==title){
-                    _titles.splice(i,1);
-                    i-=1;
-                    removeChild(title);
-                }
-            }
-        }
     }
 }
 }
