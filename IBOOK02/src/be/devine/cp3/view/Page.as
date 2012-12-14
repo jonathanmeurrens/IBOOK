@@ -31,7 +31,7 @@ import starling.textures.TextureAtlas;
 public class Page extends Sprite
     {
         private var _pageVO:PageVO;
-        private var _components:Vector.<DisplayObject>;
+        public var components:Vector.<DisplayObject>;
 
         private var _foregroundContainer:Sprite;
         private var _foregroundContainerIniX:int;
@@ -47,11 +47,11 @@ public class Page extends Sprite
             _background = new Quad(Starling.current.stage.width, Starling.current.stage.height,0x00000);
             addChild(_background);
 
-            _components = new Vector.<DisplayObject>();
+            components = new Vector.<DisplayObject>();
             for each(var componentVO:ComponentVO in _pageVO._components)
             {
                 var component:DisplayObject = ComponentViewFactory.createFromVO(componentVO);
-                _components.push(component);
+                components.push(component);
                 if(component is Gallery)
                     addChild(component);
                 else
@@ -63,7 +63,7 @@ public class Page extends Sprite
 
         public function setAsThumbnail():void
         {
-            for each(var object:DisplayObject in _components)
+            for each(var object:DisplayObject in components)
             {
                 if(object is Button)
                 {
@@ -79,7 +79,7 @@ public class Page extends Sprite
 
         public function toggleAnimations():void
         {
-            for each(var object:DisplayObject in _components)
+            for each(var object:DisplayObject in components)
             {
                 if(object is Gallery)
                 {

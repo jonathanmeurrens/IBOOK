@@ -134,5 +134,36 @@ public class TextFieldFactory
 
         return textContainer;
     }
+
+    public static function createPageNumber(text:String):Sprite
+    {
+        var textContainer:Sprite = new Sprite();
+
+        var textFormat:TextFormat = new TextFormat();
+        textFormat.align = TextAlign.LEFT;
+        textFormat.font="Verdana";
+        textFormat.leading=1.7;
+        textFormat.size=15;
+        textFormat.color=0x000000;
+
+        var textfield:TextField = new TextField();
+        textfield.embedFonts=true;
+        textfield.condenseWhite=true;
+        textfield.wordWrap=true;
+        textfield.multiline=true;
+        textfield.width=20;
+        textfield.autoSize=TextFieldAutoSize.LEFT;
+        textfield.htmlText = text;
+        textfield.setTextFormat(textFormat);
+        textfield.antiAliasType = AntiAliasType.ADVANCED;
+
+        var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);
+        snapshot.draw(textfield, new Matrix());
+
+        var textImage:Image = new Image(Texture.fromBitmapData(snapshot));
+        textContainer.addChild(textImage);
+
+        return textContainer;
+    }
 }
 }

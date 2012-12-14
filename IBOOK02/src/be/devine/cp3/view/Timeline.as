@@ -10,6 +10,8 @@ import be.devine.cp3.model.AppModel;
 import be.devine.cp3.view.components.buttons.CurrentPageButton;
 import be.devine.cp3.view.components.scrollbar.ScrollBar;
 import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
+import be.devine.cp3.view.components.text.Title;
+import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
@@ -21,6 +23,7 @@ import starling.core.Starling;
 
 import starling.display.Quad;
 
+import starling.display.DisplayObject;
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.Touch;
@@ -38,6 +41,7 @@ public class Timeline extends Sprite{
     private var _timelineBTN:CurrentPageButton;
     private var _currentThumb:Quad;
     private var _pages:Vector.<Page>;
+    private var _titles:Vector.<Title>;
 
     public function Timeline() {
         _appModel = AppModel.getInstance();
@@ -46,6 +50,9 @@ public class Timeline extends Sprite{
 
     //TODO: Default inklappen
     private function bookChangedHandler(event:flash.events.Event):void {
+        //parameters instellen
+        _titles = new Vector.<Title>();
+
         //background timeline
         _background =  new Quad(130,stage.stageHeight,_appModel.bookVO.themeColor);
         _background.x = stage.stageWidth - 130;
@@ -86,13 +93,16 @@ public class Timeline extends Sprite{
 
         //luisteren naar het pagechanged event
         _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, updateIndex);
+
+        //default hide
+        showHideTimeline(null);
     }
 
     private function updateIndex(event:flash.events.Event):void {
         //als de paginaindex > dan 3 dan moet _container verschuiven.
-        var timelineTween:Tween = new Tween(_timelineBTN, 0.5, Transitions.LINEAR);
-        var currentTween:Tween = new Tween(_currentThumb, 0.5, Transitions.LINEAR);
-        var containerTween:Tween = new Tween(_container, 1, Transitions.LINEAR);
+        var timelineTween:Tween = new Tween(_timelineBTN, 0.2, Transitions.LINEAR);
+        var currentTween:Tween = new Tween(_currentThumb, 0.2, Transitions.LINEAR);
+        var containerTween:Tween = new Tween(_container, 0.5, Transitions.LINEAR);
 
         var timelineY:int = new int();
         var currentY:int = new int();
@@ -120,6 +130,8 @@ public class Timeline extends Sprite{
         Starling.juggler.add(timelineTween);
         Starling.juggler.add(currentTween);
         Starling.juggler.add(containerTween);
+
+        removeTitles();
     }
 
     private function pageTouch(event:TouchEvent):void {
@@ -130,15 +142,7 @@ public class Timeline extends Sprite{
         }
         if(touch.phase == TouchPhase.HOVER)
         {
-            //TODO: titel tevoorschijn laten komen
-          /* var components:Vector.<ComponentVO> = _appModel.bookVO.pages[_pages.indexOf(target)]._components;
-            for each(var object:DisplayObject in components)
-            {
-                if(object is Button)
-                {
-                    object.visible=false;
-                }
-            }*/
+                showTitle(target);
         }
     }
 
@@ -148,6 +152,7 @@ public class Timeline extends Sprite{
         if(this.x == 0)
         {
             t.animate("x", 130);
+            removeTitles();
         }
         else
         {
@@ -160,6 +165,7 @@ public class Timeline extends Sprite{
         var containerY:int = Math.floor(-((_container.height - 425) * _scrollBar.position));
         trace(containerY);
         _container.y = containerY;
+        removeTitles();
     }
 
     //scrollbar toevoegen
@@ -188,9 +194,71 @@ public class Timeline extends Sprite{
         _timelineBTN = new CurrentPageButton();
         addChild(_timelineBTN);
         _timelineBTN.x = stage.stageWidth - 170;
-        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-15;
+        _timelineBTN.y = _pages[_appModel.currentPageIndex].y + _pages[_appModel.currentPageIndex].height/2-11;
         _timelineBTN.touchable = true;
         _timelineBTN.addEventListener(starling.events.Event.TRIGGERED, showHideTimeline);
+    }
+
+    // title show
+     private function showTitle(target:Page):void
+     {
+         var title:DisplayObject;
+         var components:Vector.<DisplayObject> = _pages[_pages.indexOf(target)].components;
+         for each(var object:DisplayObject in components)
+         {
+             if(object is Title)
+             {
+                 title = object;
+                 if(_titles.indexOf(title) == -1)
+                 {
+                     trace("[Timeline] Show Title");
+                     addChild(title);
+                     title.scaleX = title.scaleY = 0.5;
+                     title.x = _background.x - title.width;
+                     title.y = (target.y + target.height)-(target.height/2) - title.height/2 + _container.y;
+                     title.alpha = 1;
+                     _titles.push(title);
+                 }
+                 else
+                 {
+                     tweenOut(title);
+                 }
+             }
+         }
+     }
+
+    private function tweenOut(title:DisplayObject)
+    {
+        Starling.juggler.removeTweens(title);
+        var tweenOut:Tween = new Tween(title, 0.4,Transitions.LINEAR);
+        tweenOut.animate("alpha",0);
+        tweenOut.delay = 2;
+        tweenOut.onComplete = function(){
+            for(var i:int=0; i<_titles .length;i++){
+                if(_titles[i]==title){
+                    _titles.splice(i,1);
+                    i-=1;
+                    removeChild(title);
+                }
+            }
+        };
+        Starling.juggler.add(tweenOut);
+    }
+
+    private function removeTitles():void
+    {
+        for each(var title:Title in _titles)
+        {
+            title.alpha = 0;
+            Starling.juggler.removeTweens(title);
+            for(var i:int=0; i<_titles .length;i++){
+                if(_titles[i]==title){
+                    _titles.splice(i,1);
+                    i-=1;
+                    removeChild(title);
+                }
+            }
+        }
     }
 }
 }

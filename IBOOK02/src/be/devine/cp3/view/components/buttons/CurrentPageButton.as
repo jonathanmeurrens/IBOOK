@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.view.components.buttons {
+import be.devine.cp3.factory.view.TextFieldFactory;
 import be.devine.cp3.model.AppModel;
 import be.devine.cp3.view.components.text.MyTextField;
 
@@ -15,11 +16,12 @@ import flash.display.Shape;
 import flash.events.Event;
 
 import starling.display.Button;
+import starling.display.Sprite;
 import starling.textures.Texture;
 
 public class CurrentPageButton extends Button{
 
-    private var _pageNumber:MyTextField;
+    private var _pageNumber:Sprite;
     private var _appModel:AppModel;
 
     public function CurrentPageButton(){
@@ -36,16 +38,22 @@ public class CurrentPageButton extends Button{
 
         super(Texture.fromBitmapData(bmpData));
 
-        _pageNumber = new MyTextField(40,30,String(_appModel.currentPageIndex+1),'Avenir',17,_appModel.bookVO.fontColor,true);
-        _pageNumber.y = 2;
-        _pageNumber.x = 3;
-        addChild(_pageNumber);
+        addPageNumber();
 
         _appModel.addEventListener(AppModel.CURRENT_PAGE_CHANGED, pageIndexChanged);
     }
 
     private function pageIndexChanged(event:Event):void {
-        _pageNumber.text = String(_appModel.currentPageIndex+1);
+        this.removeChild(_pageNumber);
+        addPageNumber();
+    }
+
+    private function addPageNumber():void
+    {
+        _pageNumber = TextFieldFactory.createPageNumber(String(_appModel.currentPageIndex+1));
+        _pageNumber.y = 2;
+        _pageNumber.x = 3;
+        addChild(_pageNumber);
     }
 }
 }
