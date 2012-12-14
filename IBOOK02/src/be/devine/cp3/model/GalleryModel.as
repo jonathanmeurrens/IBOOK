@@ -19,6 +19,7 @@ public class GalleryModel extends EventDispatcher{
     private var _selectedImageIndex:uint=-1;
     private var _images:Vector.<ImageVO>;
     private var _isAnimationsOn:Boolean=false;
+    private var _loop:Boolean=true;
 
     public function GalleryModel()
     {
@@ -79,6 +80,16 @@ public class GalleryModel extends EventDispatcher{
 
     public function set isAnimationsOn(value:Boolean):void {
         _isAnimationsOn = value;
+    }
+
+    public function set loop(value:Boolean):void
+    {
+        _loop = value;
+    }
+
+    public function get loop():Boolean
+    {
+        return _loop;
     }
 }
 }

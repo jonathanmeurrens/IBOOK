@@ -38,6 +38,7 @@ public class TextFieldFactory
         textFormat.color=0x000000;
 
         var textfield:TextField = new TextField();
+        textfield.defaultTextFormat=textFormat;
         textfield.embedFonts=true;
         textfield.condenseWhite=true;
         textfield.wordWrap=true;
@@ -45,7 +46,6 @@ public class TextFieldFactory
         textfield.width=350;
         textfield.autoSize=TextFieldAutoSize.LEFT;
         textfield.htmlText = text;
-        textfield.setTextFormat(textFormat);
         textfield.antiAliasType = AntiAliasType.ADVANCED;
 
         var snapshot:BitmapData = new BitmapData(textfield.width, textfield.height, true, 0x00000000);

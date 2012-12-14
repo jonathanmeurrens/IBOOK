@@ -7,6 +7,7 @@
  */
 package be.devine.cp3.view.components.preloader {
 import be.devine.cp3.model.AppModel;
+import be.devine.cp3.util.AlignUtil;
 
 import flash.events.Event;
 
@@ -23,7 +24,10 @@ public class Preloader extends Sprite
 {
     private var _appModel:AppModel;
     private var _progressBar:Quad;
+    private var _background:Quad;
     private var _tween:Tween;
+    private var _width:uint=250;
+    private var _height:uint = 10;
 
     public static const PRELOADING_DONE:String = "PRELOADING_DONE";
 
@@ -32,11 +36,14 @@ public class Preloader extends Sprite
         _appModel = AppModel.getInstance();
         _appModel.addEventListener(AppModel.PROGRESS_CHANGED, progressChangedHandler);
 
-        _progressBar = new Quad(1,5,0xFFFFFF);
+        _background = new Quad(_width,_height,0x555555);
+        addChild(_background);
+
+        _progressBar = new Quad(1,height,0xFFFFFF);
         addChild(_progressBar);
-        _progressBar.y = Starling.current.stage.stageHeight/2-_progressBar.height/2;
 
-
+        AlignUtil.alignToStage(this,Starling.current.stage,AlignUtil.CENTER, AlignUtil.CENTER);
+        //_progressBar.y = Starling.current.stage.stageHeight/2-_progressBar.height/2;
     }
 
     private function progressChangedHandler(e:flash.events.Event):void
@@ -45,16 +52,12 @@ public class Preloader extends Sprite
         //_progressBar.width = ;
         _tween = new Tween(_progressBar,1);
         _tween.delay=0.5;
-        _tween.animate("width",Starling.current.stage.stageWidth*((_appModel.pagesLoadedProgress/_appModel.totalToLoad)));
+        _tween.animate("width",_width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad)));
         Starling.juggler.add(_tween);
 
         if(_appModel.pagesLoadedProgress==_appModel.totalToLoad)
         {
             dispatchEvent(new starling.events.Event(Preloader.PRELOADING_DONE));
-            /*_tween.fadeTo(0);
-            _tween = new Tween(_progressBar,0.5);
-            _tween.delay=1;
-            Starling.juggler.add(_tween);*/
         }
     }
 }

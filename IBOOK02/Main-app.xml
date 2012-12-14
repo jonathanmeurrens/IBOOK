@@ -51,13 +51,13 @@
         <content>SWF file name is set automatically at compile time</content>
 
         <!-- The title of the main window. Optional. -->
-        <!--<title></title>-->
+        <title>iBook</title>
 
         <!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
-        <!--<systemChrome></systemChrome>-->
+        <!--<systemChrome>none</systemChrome>-->
 
         <!-- Whether the window is transparent. Only applicable when systemChrome is none. Optional. Default false. -->
-        <!--<transparent></transparent>-->
+        <!--<transparent>true</transparent>-->
 
         <!-- Whether the window is initially visible. Optional. Default false. -->
         <visible>true</visible>
@@ -78,10 +78,10 @@
         <!--<height></height>-->
 
         <!-- The window's initial x position. Optional. -->
-        <x>0</x>
+        <!--<x>0</x>-->
 
         <!-- The window's initial y position. Optional. -->
-        <y>0</y>
+        <!--<y>0</y>-->
 
         <!-- The window's minimum size, specified as a width/height pair in pixels, such as "400 200". Optional. -->
         <!--<minSize></minSize>-->

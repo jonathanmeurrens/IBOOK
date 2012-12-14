@@ -3,71 +3,84 @@
     <summary>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur auctor turpis, quis congue magna aliquet ac. Donec arcu turpis, vehicula ac varius eu, pharetra a libero. Proin blandit rutrum dolor nec feugiat. Quisque eget condimentum erat. Nulla facilisi. Aliquam tincidunt elit quis ante facilisis ac cursus tortor fermentum.</summary>
     <pages>
         <page >
-            <title vAlign="center" hAlign="center">A fruit seller</title>
+            <title vAlign="center" hAlign="left">Asia, another view</title>
             <gallery>
-                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
-                <image url="assets/images/03.jpg" caption="Fancy Asian costume"></image>
-                <image url="assets/images/04.jpg" caption="Chinese market"></image>
+                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
             </gallery>
         </page>
         <page >
             <!--<title vAlign="bottom" hAlign="right">A fruit seller</title>-->
             <body vAlign="top" hAlign="left">
                 <![CDATA[
-                <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b> <br/>Nam dictum cursus lorem et dictum. Proin sit amet metus et <u>
-                risus pharetra</u> tincidunt. Nulla porta commodo dignissim. Sed gravida nunc a eros eleifend non accumsan urna volutpat.
-                Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nam dictum cursus lorem et dictum. Proin sit amet metus et risus pharetra tincidunt. Nulla porta commodo dignissim.
-                Sed gravida nunc a eros eleifend non accumsan urna volutpat. Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.
-                Nam dictum cursus lorem et dictum. Proin sit amet metus et risus pharetra tincidunt. Nulla porta commodo dignissim.
-                <br></br><br></br>Sed gravida nunc a eros eleifend non accumsan urna volutpat. Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum cursus lorem et dictum.
-                Proin sit amet metus et risus pharetra tincidunt. Nulla porta commodo dignissim.
-                Sed gravida nunc a eros eleifend non accumsan urna volutpat.
-                Donec placerat mauris id ante facilisis ac pellentesque risus pulvinar.
+                <u>Asia is the world's largest and most populous continent, located primarily in the eastern and northern hemispheres.</u>
+                It covers 8.7% of the Earth's total surface area (or 30% of its land area) and with approximately 4.3 billion people, it hosts
+                60% of the world's current human population. During the 20th century Asia's population nearly quadrupled.
+                <br/><br/>
+                Asia is defined as comprising the eastwards four-fifths of Eurasia. It is located to the east of the Suez Canal and the Ural
+                Mountains, and south of the Caucasus Mountains (or the Kuma-Manych Depression) and the Caspian and Black Seas.[4][5] It is
+                bounded on the east by the Pacific Ocean, on the south by the Indian Ocean and on the north by the Arctic Ocean.
                 ]]>
             </body>
-            <link to="2" vAlign="top" hAlign="left" xOffset="0" yOffset="390">read more about koala's...</link>
+            <link to="2" vAlign="top" hAlign="left" xOffset="0" yOffset="400">read more about koala's...</link>
             <gallery>
-                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
-                <image url="assets/images/03.jpg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/06.jpeg" caption="A fruit seller"></image>
+                <image url="assets/images/07.jpeg" caption="Asians!"></image>
             </gallery>
         </page>
         <page>
+            <title vAlign="top" hAlign="left">The Economy, a bright future</title>
+            <body vAlign="bottom" hAlign="left">
+                <![CDATA[
+               In the late 1980s and early 1990s, Japan's GDP was almost as large (current exchange rate method) as that of the rest of Asia
+               combined.[citation needed] In 1995, Japan's economy nearly equaled that of the USA as the largest economy in the world for a
+               day, after the Japanese currency reached a record high of 79 yen/US$. Economic growth in Asia since World War II to the 1990s
+               had been concentrated in Japan as well as the four regions of South Korea, Taiwan, Hong Kong and Singapore located in the
+               Pacific Rim, known as the Asian tigers, which have now all received developed country status, having the highest GDP per capita
+               in Asia.
 
-            <title vAlign="center" hAlign="center">A Second Page</title>
 
-            <link>3</link>
+               It is forecasted that India will overtake Japan in terms of nominal GDP by 2020.[36] By 2027, according to Goldman Sachs,
+               China will have the largest economy in the world. Several trade blocs exist, with the most developed being the Association of
+               Southeast Asian Nations.
+                ]]>
+            </body>
             <gallery>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
-                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
                 <image url="assets/images/04.jpg" caption="Chinese market"></image>
             </gallery>
         </page>
         <page>
+            <title vAlign="top" hAlign="left">Slanted eyes because they eat rise?</title>
+            <body vAlign="bottom" hAlign="left">
+                <![CDATA[
+               Asian people don’t have smaller eyes in comparison to other nationalities; they generally have the same size. They don’t see less and aren’t more sensitive to the sun.<br/><br/>
+The reason why Asian people have slanted eyes is caused by the fact that they come from a place where the weather reaches the most extreme weather conditions due to the wind and cold.
+The consequence of these conditions was that over time, their eyes adjusted to this. Think about a really windy day. Normally you tend to close your eyes a little bit to protect yourself from the weather.
+You’d do the same to protect yourself from bright sunlight reflecting on snow. It is not only very annoying, but it’s also harmful to the eyes, and it seems that the morphology of the Asian eye helps to protect them in a very efficient way.
+Ok, in Japan there are areas where the weather isn’t that extreme, but they still maintain this particular feature, though perhaps not as pronounced as other places in Asia.
+                ]]>
+            </body>
             <gallery>
-                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
-                <image url="assets/images/03.jpg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/eyes01.jpg" caption="Chinese market"></image>
+                <image url="assets/images/eyes02.jpg" caption="Chinese market"></image>
             </gallery>
-            <title>Third Page</title>
-            <body>I like being the second page!</body>
-
-            <link>3</link>
         </page>
         <page>
+            <title vAlign="bottom" hAlign="left">Asian people are cool, are they?</title>
             <gallery>
-                <image url="assets/images/01.jpg" caption="A fruit seller"></image>
-                <image url="assets/images/02.jpg" caption="Asians!"></image>
-                <image url="assets/images/03.jpg" caption="Fancy Asian costume"></image>
-                <image url="assets/images/04.jpg" caption="Chinese market"></image>
+                <image url="assets/images/fun.jpg" caption="Chinese market"></image>
             </gallery>
-            <title>What about me? I'm the fourth page</title>
-            <body>I'm some cool content</body>
-            <link></link>
-
+            <link to="5">read the story about that little crazy boy...</link>
+        </page>
+        <page>
+            <body vAlign="center" hAlign="center">
+                <![CDATA[
+                A little text about a crazy asian story.
+                ]]>
+            </body>
+            <gallery>
+                <image url="assets/images/crazy_asian.jpg" caption="Chinese market"></image>
+                <image url="assets/images/fun.jpg" caption="Chinese market"></image>
+            </gallery>
         </page>
     </pages>
 </book>

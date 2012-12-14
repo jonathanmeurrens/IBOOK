@@ -85,6 +85,7 @@ public class Thumbnails extends Sprite
             {
                 case TouchPhase.BEGAN:
                     _galleryModel.selectedImageIndex=_thumbnails.indexOf(e.currentTarget);
+                    _galleryModel.loop=false;
             }
         }
     }

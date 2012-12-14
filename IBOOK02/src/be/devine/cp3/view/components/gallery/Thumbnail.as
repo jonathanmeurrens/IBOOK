@@ -20,10 +20,10 @@ public class Thumbnail extends Sprite
     public function Thumbnail()
     {
         var bullet:Shape = new Shape();
-        //bullet.graphics.beginFill(AppModel.getInstance().bookVO.themeColor);
+        bullet.graphics.beginFill(AppModel.getInstance().bookVO.themeColor);
         bullet.graphics.lineStyle(1,AppModel.getInstance().bookVO.themeColor);
         bullet.graphics.drawEllipse(0,0,10,10);
-        //bullet.graphics.endFill();
+        bullet.graphics.endFill();
         var bitmapBullet:BitmapData = new BitmapData(bullet.width, bullet.height,true,0x000000);
         bitmapBullet.draw(bullet);
         addChild(new Image(Texture.fromBitmapData(bitmapBullet)));

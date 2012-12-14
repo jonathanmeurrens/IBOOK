@@ -34,8 +34,11 @@ public class Page extends Sprite
         private var _components:Vector.<DisplayObject>;
 
         private var _foregroundContainer:Sprite;
+        private var _foregroundContainerIniX:int;
         private var _isAnimationsOn:Boolean=false;
         private var _background:Quad;
+
+        private var _tween:Tween;
 
         public function Page(pageVO:PageVO)
         {
@@ -55,6 +58,7 @@ public class Page extends Sprite
                     _foregroundContainer.addChild(component);
                 addChild(_foregroundContainer);
             }
+            _foregroundContainerIniX = _foregroundContainer.x;
         }
 
         public function setAsThumbnail():void
@@ -91,29 +95,29 @@ public class Page extends Sprite
 
         public function transitionIn():void
         {
-            _foregroundContainer.x+=200;
-            var tween:Tween = new Tween(_foregroundContainer, 2, Transitions.EASE_IN_OUT);
-            tween.animate("x",_foregroundContainer.x-200);
-            Starling.juggler.add(tween);
+            _foregroundContainer.x=_foregroundContainerIniX+200;
+            _tween = new Tween(_foregroundContainer, 2, Transitions.EASE_IN_OUT);
+            _tween.animate("x",_foregroundContainerIniX);
+            Starling.juggler.add(_tween);
         }
 
         public function transitionOut():void
         {
-            var tween:Tween = new Tween(_foregroundContainer, 1.5, Transitions.EASE_IN_OUT);
-            tween.animate("x",_foregroundContainer.x-200);
-            tween.onComplete = function():void{
-                _foregroundContainer.x+=200;
+            _tween = new Tween(_foregroundContainer, 1.5, Transitions.EASE_IN_OUT);
+            _tween.animate("x",_foregroundContainerIniX-200);
+            _tween.onComplete = function():void{
+                _foregroundContainer.x=_foregroundContainerIniX;
             }
-            Starling.juggler.add(tween);
+            Starling.juggler.add(_tween);
         }
 
-        public override function render(support:RenderSupport, alpha:Number):void
+        /*public override function render(support:RenderSupport, alpha:Number):void
         {
             support.finishQuadBatch();
             Starling.context.setScissorRectangle(new Rectangle(0,0,Starling.current.stage.stageWidth,Starling.current.stage.stageHeight));
             super.render(support, alpha);
             support.finishQuadBatch();
             Starling.context.setScissorRectangle(null);
-        }
+        }*/
     }
 }

@@ -11,10 +11,12 @@ import be.devine.cp3.model.AppModel;
 import be.devine.cp3.vo.PageVO;
 
 import flash.events.Event;
+import flash.geom.Rectangle;
 
 import starling.animation.Transitions;
 
 import starling.animation.Tween;
+import starling.core.RenderSupport;
 import starling.core.Starling;
 
 import starling.display.Sprite;
@@ -63,5 +65,14 @@ public class Book extends Sprite
             tween.animate("x",-(_appModel.currentPageIndex)*stage.stageWidth);
             Starling.juggler.add(tween);
         }
+
+        /*public override function render(support:RenderSupport, alpha:Number):void
+        {
+            support.finishQuadBatch();
+            Starling.context.setScissorRectangle(new Rectangle(0,0,Starling.current.stage.stageWidth-200,Starling.current.stage.stageHeight-100));
+            super.render(support, alpha);
+            support.finishQuadBatch();
+            Starling.context.setScissorRectangle(null);
+        }*/
     }
 }

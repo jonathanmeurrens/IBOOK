@@ -57,7 +57,10 @@ public class Gallery extends Sprite
 
     private function timerHandler(e:TimerEvent):void
     {
-        _galleryModel.goToNextImage();
+        if(_galleryModel.loop)
+            _galleryModel.goToNextImage();
+        else
+            _timer.stop();
     }
 
     public function toggleAnimations(isAnimationsOn:Boolean)
