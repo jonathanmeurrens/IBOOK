@@ -21,7 +21,7 @@
                 bounded on the east by the Pacific Ocean, on the south by the Indian Ocean and on the north by the Arctic Ocean.
                 ]]>
             </body>
-            <link to="2" vAlign="top" hAlign="left" xOffset="0" yOffset="400">read more about koala's...</link>
+            <link to="2" vAlign="top" hAlign="left" xOffset="0" yOffset="300">read more about the Chinese Economy...</link>
             <gallery>
                 <image url="assets/images/06.jpeg" caption="A fruit seller"></image>
                 <image url="assets/images/07.jpeg" caption="Asians!"></image>
@@ -59,6 +59,7 @@ You’d do the same to protect yourself from bright sunlight reflecting on snow.
 Ok, in Japan there are areas where the weather isn’t that extreme, but they still maintain this particular feature, though perhaps not as pronounced as other places in Asia.
                 ]]>
             </body>
+            <link to="6">read about the Hong Kong etiquette.</link>
             <gallery>
                 <image url="assets/images/eyes01.jpg" caption="Chinese market"></image>
                 <image url="assets/images/eyes02.jpg" caption="Chinese market"></image>
@@ -72,9 +73,11 @@ Ok, in Japan there are areas where the weather isn’t that extreme, but they st
             <link to="5">read the story about that little crazy boy...</link>
         </page>
         <page>
-            <body vAlign="center" hAlign="center">
+            <body vAlign="left" hAlign="bottom">
                 <![CDATA[
-                A little text about a crazy asian story.
+                So there's this little asian boy who lives with his grandfather in Beijing. They live there as wanderers, sad you think, well think again.
+                They found a way to make money on fun way! At the fountains of Beijing they start off a real amazing show on random moments when it's very crowded.
+                World's biggest acrobatic tricks and funniest acts, they always do something new and awesome at this show! You really should go and see this 'flash-mob'-show yourself!
                 ]]>
             </body>
             <gallery>
@@ -83,9 +86,18 @@ Ok, in Japan there are areas where the weather isn’t that extreme, but they st
             </gallery>
         </page>
         <page >
-            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <title vAlign="top" hAlign="left">Hong Kong etiquette</title>
+            <body vAlign="bottom" hAlign="left">
+                <![CDATA[
+                Most East Asian cuisines, with the exception of fusion and Thai, are consumed exclusively with chopsticks.
+                 The more Western style cuisines favor cutlery. Some meals are more suited for the use of hands.
+                 One notable trend in restaurants is the limited number of napkins provided during a meal.
+                 Most mid to low-tier restaurants operate under the assumption that customers bring their own napkins or tissue packs when dining.
+                ]]>
+            </body>
             <gallery>
-                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/asianCooks.jpg" caption="Asian cooks"></image>
+                <image url="assets/images/04.jpg" caption="Asian market"></image>
             </gallery>
         </page>
         <page >
