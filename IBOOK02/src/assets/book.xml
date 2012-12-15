@@ -28,7 +28,7 @@
             </gallery>
         </page>
         <page>
-            <title vAlign="top" hAlign="left">The Economy, a bright future</title>
+            <title vAlign="top" hAlign="left" xOffset="0" yOffset="200">The Economy, a bright future</title>
             <body vAlign="bottom" hAlign="left">
                 <![CDATA[
                In the late 1980s and early 1990s, Japan's GDP was almost as large (current exchange rate method) as that of the rest of Asia

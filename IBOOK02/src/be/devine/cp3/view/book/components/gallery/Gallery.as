@@ -5,10 +5,10 @@
  * Time: 14:06
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.gallery
+package be.devine.cp3.view.book.components.gallery
 {
 import be.devine.cp3.model.GalleryModel;
-import be.devine.cp3.util.AlignUtil;
+import be.devine.cp3.util.align.AlignUtil;
 import be.devine.cp3.vo.GalleryVO;
 
 import flash.events.TimerEvent;
@@ -43,6 +43,7 @@ public class Gallery extends Sprite
 
     private function setSlideshow():void
     {
+        trace("[Gallery] setSlideshow: "+_galleryModel.isAnimationsOn);
         if(_timer==null)
         {
             _timer = new Timer(10000);
@@ -50,7 +51,10 @@ public class Gallery extends Sprite
         }
 
         if(_galleryModel.isAnimationsOn)
+        {
+            _galleryModel.loop=true;
             _timer.start();
+        }
         else
             _timer.stop();
     }

@@ -5,10 +5,9 @@
  * Time: 15:17
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.buttons {
+package be.devine.cp3.view.book.components.buttons {
 import be.devine.cp3.factory.view.TextFieldFactory;
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.view.components.text.MyTextField;
 
 import flash.display.BitmapData;
 

@@ -5,7 +5,7 @@
  * Time: 08:46
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view {
+package be.devine.cp3.view.book.timeline {
 import be.devine.cp3.factory.view.TextFieldFactory;
 import be.devine.cp3.util.queue.Queue;
 import be.devine.cp3.util.queue.tasks.LoaderTask;

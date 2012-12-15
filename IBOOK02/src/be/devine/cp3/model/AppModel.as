@@ -33,7 +33,6 @@ public class AppModel extends EventDispatcher{
     public static const BOOK_CHANGED:String ="BOOK_CHANGED";
     public static const BODY_SCROLLBAR_CHANGED:String = "BODY_SCROLLBAR_CHANGED";
     public static const PROGRESS_CHANGED:String = "PROGRESS_CHANGED";
-    //public static const PRELOADING_DONE:String = "PRELOADING_DONE";
 
     private static var instance:AppModel;
 
@@ -101,7 +100,6 @@ public class AppModel extends EventDispatcher{
 
         if(value!=_currentPageIndex && value>=0 && value<_bookVO.pages.length)
         {
-            trace("[AppModel] page changed to "+value);
             _currentPageIndex = value;
             dispatchEvent(new Event(AppModel.CURRENT_PAGE_CHANGED));
         }
@@ -111,7 +109,6 @@ public class AppModel extends EventDispatcher{
 
     public function set pagesLoadedProgress(value:uint):void
     {
-        trace("[AppModel loadingprogress]"+value);
         if(value!=_pagesLoadedProgress)
         {
             _pagesLoadedProgress = value;
@@ -127,13 +124,6 @@ public class AppModel extends EventDispatcher{
     public function set totalToLoad(value:uint):void
     {
         _totalToLoad = value;
-
-       /* if(_totalToLoad==_pagesLoadedProgress)
-        {
-            dispatchEvent(new Event(AppModel.PRELOADING_DONE));
-            trace("[AppModel] DONE REALLY DONE" );
-        }*/
-
     }
 
     public function get totalToLoad():uint

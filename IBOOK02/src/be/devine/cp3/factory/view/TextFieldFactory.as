@@ -104,7 +104,7 @@ public class TextFieldFactory
     {
         config.text=text;
         config.backgroundColor = AppModel.getInstance().bookVO.themeColor;
-        config.width = 350;
+        config.width = 370;
         config.condenseWhite=true;
         config.leading = 1.9;
         config.font = "Futura Std Medium Condensed";
@@ -159,7 +159,7 @@ public class TextFieldFactory
     {
         config.text=text;
         config.backgroundColor = 0x111111;
-        config.leading = 1.5;
+        config.leading = 1.3;
         config.font = "Verdana";
         config.color = 0xFFFFFF;
         config.size = 9;

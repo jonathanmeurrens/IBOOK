@@ -7,10 +7,10 @@
  */
 package be.devine.cp3 {
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.util.BookXMLParser;
-import be.devine.cp3.view.Book;
-import be.devine.cp3.view.Timeline;
-import be.devine.cp3.view.components.preloader.Preloader;
+import be.devine.cp3.util.xml.BookXMLParser;
+import be.devine.cp3.view.book.Book;
+import be.devine.cp3.view.book.timeline.Timeline;
+import be.devine.cp3.view.ui.preloader.Preloader;
 
 import flash.display.BitmapData;
 
@@ -37,11 +37,9 @@ public class Application extends Sprite
 {
     private var _appModel:AppModel;
     private var _fontContainer:FontContainer = new FontContainer();
-
     private var _book:Book;
     private var _timeline:Timeline;
     private var _preloader:Preloader;
-    private var _background:Shape;
 
     public function Application()
     {
@@ -82,6 +80,9 @@ public class Application extends Sprite
             case Keyboard.RIGHT :
             case Keyboard.DOWN:
                 _appModel.goToNextPage();
+                break;
+            case Keyboard.SPACE:
+                _timeline.toggleHideTimeline();
                 break;
         }
     }

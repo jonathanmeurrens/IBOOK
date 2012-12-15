@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.vo {
-import be.devine.cp3.util.AlignUtil;
+import be.devine.cp3.util.align.AlignUtil;
 
 public class LinkVO extends ComponentVO
 {

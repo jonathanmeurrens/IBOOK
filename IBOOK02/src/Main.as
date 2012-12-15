@@ -20,7 +20,7 @@ public class Main extends MovieClip {
 
     public function Main() {
 
-        setupCustomChromeWindow();
+        setupWindow();
 
         //Align and Scale
         stage.align = StageAlign.TOP_LEFT;
@@ -29,12 +29,9 @@ public class Main extends MovieClip {
         //starling instellen
         _starling = new Starling(Application, stage);
         _starling.start();
-
-        //resize handler
-        stage.addEventListener(Event.RESIZE, resizeHandler);
     }
 
-    private function setupCustomChromeWindow(width:uint=1024,height:uint=768):void
+    private function setupWindow(width:uint=1024,height:uint=768):void
     {
         stage.nativeWindow.bounds = new Rectangle(
                 (Screen.mainScreen.bounds.width - width) *.5,
@@ -42,13 +39,6 @@ public class Main extends MovieClip {
                 width,
                 height
         );
-    }
-
-
-    private function resizeHandler(event:Event):void {
-        if(_starling != null) {
-
-        }
     }
 }
 }

@@ -5,7 +5,7 @@
  * Time: 14:37
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.gallery {
+package be.devine.cp3.view.book.components.gallery {
 import be.devine.cp3.model.GalleryModel;
 import be.devine.cp3.util.queue.Queue;
 import be.devine.cp3.util.queue.tasks.LoaderTask;
@@ -48,7 +48,6 @@ public class Picture extends Sprite
     {
         if(_image!=null)
         {
-            trace("[Picture] fade OUT current image");
             var tween:Tween = new Tween(_image, 0.5);
             tween.fadeTo(0);
             tween.onComplete=showImage;
@@ -60,8 +59,6 @@ public class Picture extends Sprite
 
     private function showImage()
     {
-        trace("[Picture] -> ShowImage()");
-
         if(_image!=null)
         {
             removeChild(_image);
@@ -73,7 +70,6 @@ public class Picture extends Sprite
         addChild(_image);
         if(_galleryModel.isAnimationsOn)
         {
-            trace("[Picture] fade IN next image");
             _image.alpha=0;
             var tween:Tween = new Tween(_image, 0.5);
             tween.fadeTo(1);

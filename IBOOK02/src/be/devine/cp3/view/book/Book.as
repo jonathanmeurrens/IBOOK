@@ -5,8 +5,9 @@
  * Time: 17:29
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view
+package be.devine.cp3.view.book
 {
+import be.devine.cp3.view.*;
 import be.devine.cp3.model.AppModel;
 import be.devine.cp3.vo.PageVO;
 
@@ -47,12 +48,13 @@ public class Book extends Sprite
         private function pageChangedHandler(e:Event):void
         {
             var currentPage:Page = _pages[_appModel.currentPageIndex];
-            currentPage.visible=true;
+            trace("[Book] currentPage");
             currentPage.toggleAnimations();
             if(_appModel.currentPageIndex>0)
             {
                 var prevPage:Page = _pages[_appModel.currentPageIndex-1];
                 Page(prevPage.transitionOut());
+                trace("[Book] prevPage");
                 prevPage.toggleAnimations();
             }
             Page(currentPage.transitionIn());
@@ -62,14 +64,5 @@ public class Book extends Sprite
             tween.animate("x",-(_appModel.currentPageIndex)*stage.stageWidth);
             Starling.juggler.add(tween);
         }
-
-        /*public override function render(support:RenderSupport, alpha:Number):void
-        {
-            support.finishQuadBatch();
-            Starling.context.setScissorRectangle(new Rectangle(localToGlobal(new Point(0, 0)).x,localToGlobal(new Point(0, 0)).y,Starling.current.stage.stageWidth,Starling.current.stage.stageWidth));
-            super.render(support, alpha);
-            support.finishQuadBatch();
-            Starling.context.setScissorRectangle(null);
-        }*/
     }
 }

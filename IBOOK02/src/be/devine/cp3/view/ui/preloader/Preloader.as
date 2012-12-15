@@ -5,10 +5,10 @@
  * Time: 15:29
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.preloader {
+package be.devine.cp3.view.ui.preloader {
 import be.devine.cp3.factory.view.TextFieldFactory;
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.util.AlignUtil;
+import be.devine.cp3.util.align.AlignUtil;
 
 import flash.events.Event;
 
@@ -43,25 +43,13 @@ public class Preloader extends Sprite
         _progressBar = new Quad(1,height,0xFFFFFF);
         addChild(_progressBar);
 
-        /*var text:Sprite = TextFieldFactory.createPreloaderText("content is loading");
-        AlignUtil.alignToStage(text, Starling.current.stage,AlignUtil.CENTER, AlignUtil.BOTTOM);
-        addChild(text);*/
-
         AlignUtil.alignToStage(this,Starling.current.stage,AlignUtil.CENTER, AlignUtil.CENTER);
     }
 
     private function progressChangedHandler(e:flash.events.Event):void
     {
-        trace("[Peloader]"+(_appModel.pagesLoadedProgress/_appModel.totalToLoad)*100,_width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad)));
-        //_progressBar.width = _width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad));
-        //_progressBar.width = 160;
-        //_progressBar.width+=10;
-        var tween:Tween = new Tween(_progressBar,0.5);
-        //tween = new Tween(_progressBar,1);
-        //tween.delay=;
-        tween.animate("width",_width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad)));
-        Starling.juggler.add(tween);
-
+        //trace("[Peloader]"+(_appModel.pagesLoadedProgress/_appModel.totalToLoad)*100,_width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad)));
+        _progressBar.width = _width*((_appModel.pagesLoadedProgress/_appModel.totalToLoad));
 
         if(_appModel.pagesLoadedProgress==_appModel.totalToLoad)
         {

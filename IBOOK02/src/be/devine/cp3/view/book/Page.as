@@ -5,13 +5,13 @@
  * Time: 17:10
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view
+package be.devine.cp3.view.book
 {
 
-import be.devine.cp3.view.components.buttons.Link;
-import be.devine.cp3.view.components.gallery.Gallery;
-import be.devine.cp3.view.components.text.Body;
-import be.devine.cp3.view.components.text.Title;
+import be.devine.cp3.view.book.components.buttons.Link;
+import be.devine.cp3.view.book.components.gallery.Gallery;
+import be.devine.cp3.view.book.components.text.Body;
+import be.devine.cp3.view.book.components.text.Title;
 import be.devine.cp3.vo.PageVO;
 
 import flash.geom.Point;
@@ -71,13 +71,8 @@ public class Page extends Sprite
             _foregroundContainerIniX = _foregroundContainer.x;
         }
 
-        public function setAsThumbnail():void
-        {
-            if(_link!=null)_link.visible=false;
-        }
-
         /*
-        ANIMATION CONTROLS
+        ANIMATION CONTROLS, is this the current page? then play the slideshow
          */
 
         public function toggleAnimations():void
@@ -88,7 +83,7 @@ public class Page extends Sprite
         }
 
         /*
-         TWEENING
+         TWEENING, parallax effect
          */
 
         public function transitionIn():void
@@ -109,6 +104,10 @@ public class Page extends Sprite
             Starling.juggler.add(_tween);
         }
 
+
+        /*
+        RENDER MASK, to prevent pages to overflow into one another
+         */
         public override function render(support:RenderSupport, alpha:Number):void
         {
             support.finishQuadBatch();

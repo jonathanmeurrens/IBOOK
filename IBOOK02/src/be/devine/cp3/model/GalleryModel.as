@@ -7,7 +7,6 @@
  */
 package be.devine.cp3.model {
 import be.devine.cp3.vo.ImageVO;
-
 import flash.events.Event;
 import flash.events.EventDispatcher;
 

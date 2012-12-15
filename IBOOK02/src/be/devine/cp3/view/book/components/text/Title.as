@@ -5,9 +5,9 @@
  * Time: 20:20
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.text {
+package be.devine.cp3.view.book.components.text {
 import be.devine.cp3.factory.view.TextFieldFactory;
-import be.devine.cp3.util.AlignUtil;
+import be.devine.cp3.util.align.AlignUtil;
 import be.devine.cp3.vo.TitleVO;
 
 import starling.core.Starling;
@@ -21,8 +21,9 @@ public class Title extends Sprite
     {
         _titleVO = titleVO;
         addChild(TextFieldFactory.createTitleText(_titleVO.title));
-
         AlignUtil.alignToStage(this,Starling.current.stage,titleVO.vAlign, titleVO.hAlign);
+        x +=  _titleVO.xOffset;
+        y += _titleVO.yOffset;
     }
 }
 }

@@ -5,7 +5,7 @@
  * Time: 18:01
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view.components.gallery {
+package be.devine.cp3.view.book.components.gallery {
 import be.devine.cp3.model.AppModel;
 
 import flash.display.BitmapData;

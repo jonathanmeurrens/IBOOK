@@ -1,4 +1,4 @@
-package be.devine.cp3.util
+package be.devine.cp3.util.xml
 {
 import be.devine.cp3.model.AppModel;
 import be.devine.cp3.util.queue.Queue;

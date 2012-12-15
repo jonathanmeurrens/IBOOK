@@ -5,12 +5,13 @@
  * Time: 18:08
  * To change this template use File | Settings | File Templates.
  */
-package be.devine.cp3.view {
+package be.devine.cp3.view.book.timeline {
+import be.devine.cp3.view.*;
 import be.devine.cp3.model.AppModel;
-import be.devine.cp3.view.components.buttons.CurrentPageButton;
-import be.devine.cp3.view.components.scrollbar.ScrollBar;
-import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
-import be.devine.cp3.view.components.text.Title;
+import be.devine.cp3.view.book.components.buttons.CurrentPageButton;
+import be.devine.cp3.view.ui.scrollbar.ScrollBar;
+import be.devine.cp3.view.ui.scrollbar.ScrollBarOptions;
+import be.devine.cp3.view.book.components.text.Title;
 import be.devine.cp3.vo.ComponentVO;
 import be.devine.cp3.vo.PageVO;
 
@@ -75,9 +76,7 @@ public class Timeline extends Sprite{
             var thumb:TimelineThumbnail = new TimelineThumbnail(pageVO);
             thumb.y = hulpY;
             _container.addChild(thumb);
-
             thumb.addEventListener(TouchEvent.TOUCH, thumbTouch);
-
             hulpY += thumb.height + 10;
             _thumbnails.push(thumb);
         }
@@ -120,8 +119,12 @@ public class Timeline extends Sprite{
     }
 
     private function showHideTimeline(event:starling.events.Event):void {
-        trace('[TIMELINE]: show or hide TimeLine');
-        var t:Tween = new Tween(this, 0.1, Transitions.EASE_IN);
+        toggleHideTimeline();
+    }
+
+    public function toggleHideTimeline():void
+    {
+        var t:Tween = new Tween(this, 0.15, Transitions.EASE_IN);
         if(this.x == 0)
             t.animate("x", 130);
         else
@@ -142,14 +145,14 @@ public class Timeline extends Sprite{
         //opmaak van de Scrollbar
         var config:ScrollBarOptions = new ScrollBarOptions();
         config.height = stage.stageHeight;
-        config.width = 7;
+        config.width = 6;
         config.thumbcolor = 0xFFFFFF;
         config.thumbheight = 40;
         config.trackcolor = _appModel.bookVO.themeColor;
 
         //scrollbar toevoegen
         _scrollBar = new ScrollBar(config);
-        _scrollBar.x = stage.stageWidth - 9;
+        _scrollBar.x = stage.stageWidth - 12;
         _scrollBar.y = 10;
         addChild(_scrollBar);
         _scrollBar.addEventListener(ScrollBar.POSITION_UPDATED, scrollbarUpdatedHandler);

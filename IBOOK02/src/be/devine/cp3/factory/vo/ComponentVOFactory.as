@@ -15,25 +15,14 @@ import be.devine.cp3.vo.TitleVO;
 
 public class ComponentVOFactory
 {
-    /*public static function createComponentVOFromXML(elementXML:XML):ComponentVO
-    {
-        //trace(elementXML.localName());
-        switch(elementXML.localName())
-        {
-            case 'title':return createTitleVOFromXML(elementXML);
-            case 'gallery':return createGalleryVOFromXML(elementXML);
-            case 'body':return createBodyVOFromXML(elementXML);
-            case 'link':return createLinkVOFromXML(elementXML);
-        }
-        return null;
-    }*/
-
     public static function createTitleVOFromXML(elementXML:XML):TitleVO
     {
         var titleVO:TitleVO = new TitleVO();
         titleVO.hAlign = elementXML.title.@hAlign;
         titleVO.vAlign = elementXML.title.@vAlign;
         titleVO.title = elementXML.title;
+        titleVO.xOffset = elementXML.title.@xOffset;
+        titleVO.yOffset = elementXML.title.@yOffset;
         return titleVO;
     }
 
@@ -54,6 +43,8 @@ public class ComponentVOFactory
         bodyVO.body = elementXML.body;
         bodyVO.hAlign = elementXML.body.@hAlign;
         bodyVO.vAlign = elementXML.body.@vAlign;
+        bodyVO.xOffset = elementXML.body.@xOffset;
+        bodyVO.yOffset = elementXML.body.@yOffset;
         return bodyVO;
     }
 
@@ -75,15 +66,6 @@ public class ComponentVOFactory
         imageVO.caption = elementXML.@caption;
         imageVO.url = elementXML.@url;
         return imageVO;
-    }
-
-    private static function Parserover_feature(textXML:XML):String {
-
-        var s:String = textXML;
-        s = s.replace(/(?:<br>)+/gi, '<br>');
-        s = s.replace(/\n/g, '');
-        //container.info_txt.htmlText = s
-       return s;
     }
 }
 }
