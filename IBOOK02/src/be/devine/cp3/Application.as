@@ -16,6 +16,7 @@ import flash.display.BitmapData;
 
 import flash.display.Screen;
 import flash.display.Shape;
+import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.filters.DropShadowFilter;
 import flash.geom.Rectangle;

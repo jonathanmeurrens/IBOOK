@@ -17,7 +17,7 @@
                 60% of the world's current human population. During the 20th century Asia's population nearly quadrupled.
                 <br/><br/>
                 Asia is defined as comprising the eastwards four-fifths of Eurasia. It is located to the east of the Suez Canal and the Ural
-                Mountains, and south of the Caucasus Mountains (or the Kuma-Manych Depression) and the Caspian and Black Seas.[4][5] It is
+                Mountains, and south of the Caucasus Mountains (or the Kuma-Manych Depression) and the Caspian and Black Seas. It is
                 bounded on the east by the Pacific Ocean, on the south by the Indian Ocean and on the north by the Arctic Ocean.
                 ]]>
             </body>
@@ -101,21 +101,57 @@ Ok, in Japan there are areas where the weather isn’t that extreme, but they st
             </gallery>
         </page>
         <page >
-            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <title vAlign="center" hAlign="left">There's something about that river</title>
+            <body vAlign="bottom" hAlign="left">
+                <![CDATA[
+                The Yellow River is called "the cradle of Chinese civilization" as its basin – specifically,
+                 the Wei valley that cuts across the long Ordos loop – was the birthplace of ancient Chinese civilizations
+                 and the most prosperous region in early Chinese history.
+                 However, frequent devastating floods and course changes produced by the continual elevation of the river bed,
+                 sometimes above the level of its surrounding fields has also earned it the unenviable names "China's Sorrow" and "Scourge of the Sons of Han."
+                ]]>
+            </body>
             <gallery>
-                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/yellow_river_night.jpg" caption="yellow river at sunset"></image>
+                <image url="assets/images/yellow_river.jpg" caption="yellow river"></image>
             </gallery>
         </page>
         <page >
-            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <body vAlign="top" hAlign="left">
+                <![CDATA[
+                Green tea's traditional role in Japanese society is as a drink for special guests and special occasions.
+                 Green tea is served in many companies during afternoon breaks.
+                  Japanese often buy sweets for their colleagues when on vacation or business trips.
+                   These snacks are usually enjoyed with green tea. Tea will also be prepared for visitors coming for
+                   meetings to companies and for guests visiting Japanese homes. A thermos full of green tea is also a staple on
+                    family or school outings as an accompaniment to bento (box lunches).
+                    Families often bring along proper Japanese teacups, to enhance the enjoyment of the traditional drink.
+                ]]>
+            </body>
             <gallery>
-                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/thea.jpg" caption="green thea leaf"></image>
+                <image url="assets/images/theaset.jpg" caption="theaset"></image>
             </gallery>
         </page>
         <page >
-            <title vAlign="center" hAlign="left">Asia, another view</title>
+            <title vAlign="center" hAlign="left">Those crazy rich asians!</title>
+            <link to="10">Find out why they are "crazy rich" asians...</link>
             <gallery>
-                <image url="assets/images/05.jpeg" caption="Fancy Asian costume"></image>
+                <image url="assets/images/rich.jpg" caption="Rich asians"></image>
+            </gallery>
+        </page>
+        <page>
+            <body vAlign="top" hAlign="right">
+                <![CDATA[
+                In a jewelry store in Tokyo, a Christmas tree made of pure gold has been on display for a week or two now. Here and there, it garners a lot of attention because of its elegant yet child-like theme.
+                The ornament is made of 40 kg of solid gold and stands about 2.4 meters high and measures 1.2 meters in diameter. It costs a whopping 350 million yen (US$4.2 million)!
+                 <br/><br/>
+                “Right now gold is over 4,400 yen per gram. We used pure gold and had an expert craftsman form each Disney character by hand,” Tomoko Ishibashi, one of the marketing staff members of Tanaka Kikinzoku Jewelry, said of the decoration.
+                ]]>
+            </body>
+            <gallery>
+                <image url="assets/images/rich.jpg" caption="Rich asians"></image>
+                <image url="assets/images/christmastree.jpg" caption="treeee"></image>
             </gallery>
         </page>
     </pages>

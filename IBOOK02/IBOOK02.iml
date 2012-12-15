@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="IBOOK02">
+  <component name="FlexBuildConfigurationManager" active="IBOOK2">
     <configurations>
-      <configuration name="IBOOK02" target-platform="Desktop" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/../out/production/IBOOK02">
-        <dependencies target-player="11.1">
+      <configuration name="IBOOK2" target-platform="Desktop" pure-as="true" main-class="Main" output-file="IBOOK.swf" output-folder="$MODULE_DIR$/../out">
+        <dependencies>
           <entries>
-            <entry library-id="dca384e5-c445-4697-bb58-dc036a01d548">
+            <entry library-id="6efecda9-970d-434b-baf0-b415f17c504c">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="660daf06-f29d-4942-85c5-3dae6b87e461">
+            <entry library-id="f11beb90-34a2-4d3f-900f-fff997289c7a">
               <dependency linkage="Merged" />
             </entry>
           </entries>
           <sdk name="4.6.0" />
         </dependencies>
         <compiler-options />
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="IBOOK2" />
         <packaging-android />
         <packaging-ios />
       </configuration>
@@ -30,8 +30,7 @@
     <orderEntry type="jdk" jdkName="4.6.0" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library type="flex">
-        <properties id="dca384e5-c445-4697-bb58-dc036a01d548" />
+      <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/starling.swc!/" />
         </CLASSES>
@@ -41,12 +40,24 @@
     </orderEntry>
     <orderEntry type="module-library">
       <library type="flex">
-        <properties id="660daf06-f29d-4942-85c5-3dae6b87e461" />
+        <properties id="6efecda9-970d-434b-baf0-b415f17c504c" />
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/fonts/fonts.swc!/" />
+          <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="f11beb90-34a2-4d3f-900f-fff997289c7a" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/fonts" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/fonts" recursive="false" />
       </library>
     </orderEntry>
   </component>
