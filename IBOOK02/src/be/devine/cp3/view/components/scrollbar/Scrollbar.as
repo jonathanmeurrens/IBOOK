@@ -6,8 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 package be.devine.cp3.view.components.scrollbar {
-import be.devine.cp3.view.components.*;
-import be.devine.cp3.view.components.scrollbar.ScrollBarOptions;
 
 import flash.geom.Point;
 
