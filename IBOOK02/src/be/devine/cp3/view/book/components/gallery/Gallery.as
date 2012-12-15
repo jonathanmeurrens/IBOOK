@@ -43,7 +43,7 @@ public class Gallery extends Sprite
 
     private function setSlideshow():void
     {
-        trace("[Gallery] setSlideshow: "+_galleryModel.isAnimationsOn);
+        //trace("[Gallery] setSlideshow: "+_galleryModel.isAnimationsOn);
         if(_timer==null)
         {
             _timer = new Timer(10000);
